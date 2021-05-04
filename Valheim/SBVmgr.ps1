@@ -113,7 +113,7 @@ function modMgmt {
 	$m1T = ""
 	$m1Q = "Select management mode:"
 	$m1O = '&Enable', '&Disable','&Main menu'
-	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 0)
+	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 2)
 
 	if ( $m1P -eq 0 ) {
 		$modMode = "modEnb"
@@ -136,7 +136,7 @@ function modSel {
 	$m2T = ""
 	$m2Q = "Select modification:"
 	$m2O = 'Valheim&FPSBoost','1st-&Person mode','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','E&xit'
-	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O)
+	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 8)
 
 	if ( $m2P -eq 0 ) {
 		$modPf = "ValheimFPSBoost"
