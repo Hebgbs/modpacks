@@ -222,7 +222,6 @@ function modDsb {
 }
 
 function modEnb {
-function modDsb {
   if ( -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPf" ) -or
        -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPd" ) ) {
     echo "$modName is already enabled."
