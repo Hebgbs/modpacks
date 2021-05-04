@@ -7,6 +7,7 @@
       "craftingStation": "piece_workbench",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -16,7 +17,7 @@
         {
           "item": "Dandelion",
           "amount": 2
-        }
+        }		
       ]
     },
     {
@@ -26,6 +27,7 @@
       "craftingStation": "piece_workbench",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -45,6 +47,7 @@
       "craftingStation": "piece_workbench",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -64,6 +67,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -87,6 +91,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -110,6 +115,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -133,6 +139,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 60,
       "repairStation": "",
       "resources": [
         {
@@ -160,6 +167,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -187,6 +195,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 240,
       "repairStation": "",
       "resources": [
         {
@@ -241,6 +250,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 300,
       "repairStation": "",
       "resources": [
         {
@@ -268,6 +278,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 300,
       "repairStation": "",
       "resources": [
         {
@@ -295,6 +306,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 300,
       "repairStation": "",
       "resources": [
         {
@@ -322,6 +334,7 @@
       "craftingStation": "piece_cauldron",
       "minStationLevel": 1,
       "enabled": true,
+	  "ttl": 300,
       "repairStation": "",
       "resources": [
         {

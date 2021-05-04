@@ -2,91 +2,108 @@ function modState {
   if ( $modMode -eq 0 ) {
     modEnb
   }
-  if ( $modMode -eq 0 ) {
+  if ( $modMode -eq 1 ) {
     modDsb
   }
+  modSel
 }
 
 function modDsb {
-  if ( -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPf" ) -or
-       -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPd" ) ) {
+  if ( -not ( Test-Path -Path "$modPath\BepInEx\plugins\$modChk" ) ) {
     echo "$modName has already been disabled."
     pakPrompt
     modSel
   }
   if ( -not ( Test-Path -Path "$modPath\BepInEx\DisabledPlugins" ) ) {
-    mkdir $modPath\BepInEx\disabledPlugins
+    mkdir $modPath\BepInEx\disabledPlugins | Out-Null
   }
   if ( -not ( Test-Path -Path "$modPath\BepInEx\DisabledConfig" ) ) {
-    mkdir $modPath\BepInEx\disabledConfig
+    mkdir $modPath\BepInEx\disabledConfig | Out-Null
   }
-  Move-Item -Path "$modPath\BepInEx\plugins\$modPf" -Destination "$modPath\BepInEx\disabledPlugins\$modPf"
-  Move-Item -Path "$modPath\BepInEx\plugins\$modPd" -Destination "$modPath\BepInEx\disabledPlugins\$modPd"
-  Move-Item -Path "$modPath\BepInEx\config\$modCf" -Destination "$modPath\BepInEx\disabledConfig\$modCf"
+  if ( ( $modPf -ne 0 ) -and
+       ( Test-Path -Path "$modPath\BepInEx\plugins\$modPf" ) ) {
+    Move-Item -Path "$modPath\BepInEx\plugins\$modPf" -Destination "$modPath\BepInEx\disabledPlugins" | Out-Null
+  }
+  if ( ( $modPd -ne 0 ) -and
+       ( Test-Path -Path "$modPath\BepInEx\plugins\$modPd" ) ) {
+    Move-Item -Path "$modPath\BepInEx\plugins\$modPd" -Destination "$modPath\BepInEx\disabledPlugins" | Out-Null
+  }
+  if ( ( $modCf -ne 0 ) -and
+       ( Test-Path -Path "$modPath\BepInEx\config\$modCf" ) ) {
+    Move-Item -Path "$modPath\BepInEx\config\$modCf" -Destination "$modPath\BepInEx\disabledConfig" | Out-Null
+  }
   echo "$modName has been disabled."
   echo "Re-enable it by changing management mode."
   pakPrompt
-  modSel
 }
 
 function modEnb {
-  if ( -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPf" ) -or
-       -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPd" ) ) {
+  if ( -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modChk" ) ) {
     echo "$modName is already enabled."
     pakPrompt
     modSel
   }
-  Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPf" -Destination "$modPath\BepInEx\plugins\$modPf"
-  Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPd" -Destination "$modPath\BepInEx\plugins\$modPd"
-  Move-Item -Path "$modPath\BepInEx\disabledConfig\$modCf" -Destination "$modPath\BepInEx\config\$modCf"
+  if ( ( $modPf -ne 0 ) -and
+       ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPf" ) ) {
+    Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPf" -Destination "$modPath\BepInEx\plugins\$modPf"
+  }
+  if ( ( $modPd -ne 0 ) -and
+       ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPd" ) ) {
+    Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPd" -Destination "$modPath\BepInEx\plugins\$modPd"
+  }
+  if ( ( $modCf -ne 0 ) -and
+       ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modCf" ) ) {
+    Move-Item -Path "$modPath\BepInEx\disabledConfig\$modCf" -Destination "$modPath\BepInEx\config\$modCf"
+  }
   echo "$modName has been enabled."
   echo "Re-enable it by changing management mode."
   pakPrompt
-  modSel
 }
 
 function modSel {
   clearText
-  echo "The following modifications can be toggled"
-  echo "while not affecting core gameplay mechanics:"
-  echo ""
 	$m2T = ""
-	$m2Q = "Select modification:"
-	$m2O = 'ValheimFPS&Boost','1st-&Person mode','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','E&xit'
-	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 8)
+	$m2Q = "Select modification"
+	$m2O = 'ValheimFPS&Boost','&1st-Person camera','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','&Troll armor rework','E&xit'
+	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 9)
 
 	if ( $m2P -eq 0 ) {
 		$modPf = "ValheimFPSBoost"
-    $modPd = ""
-    $modCf = ""
+    $modPd = "0"
+    $modCf = "0"
+    $modChk = "$modPf"
     $modName = "$modPf"
     modState
 	}
 	if ( $m2P -eq 1 ) {
     $modPf = "FirstPersonValheimClientMod.dll"
-    $modPd = ""
+    $modPd = "0"
     $modCf = "com.loki.clientmods.valheim.firstperson.cfg"
+    $modChk = "$modPf"
     $modName = "Loki's First Person Valheim"
     modState
 	}
 	if ( $m2P -eq 2 ) {
     $modPf = "EmoteWheel.dll"
-    $modPd = ""
+    $modPd = "0"
     $modCf = "virtuacode.valheim.emotewheel.cfg"
+    $modChk = "$modPf"
     $modName = "Emote Wheel"
     modState
 	}
   if ( $m2P -eq 3 ) {
     $modPf = "EquipWheel*.dll"
-    $modPd = ""
+    $modPd = "0"
     $modCf = "virtuacode.valheim.equipwheel*.cfg"
+    $modChk = "$modPf"
     $modName = "Equip Wheels"
     modState
 	}
   if ( $m2P -eq 4 ) {
     $modPf = "ClockMod.dll"
-    $modPd = ""
+    $modPd = "0"
     $modCf = "aedenthorn.ClockMod.cfg"
+    $modChk = "$modPf"
     $modName = "Clock"
     modState
 	}
@@ -94,24 +111,35 @@ function modSel {
     $modPf = "Compass.dll"
     $modPd = "Compass"
     $modCf = "aedenthorn.Compass.cfg"
+    $modChk = "$modPf"
     $modName = "$modPd"
     modState
 	}
   if ( $m2P -eq 6 ) {
     $modPf = "FermenterStatus.dll"
-    $modPd = ""
-    $modCf = ""
+    $modPd = "0"
+    $modCf = "0"
+    $modChk = "$modPf"
     $modName = "Fermenter Status"
     modState
 	}
   if ( $m2P -eq 7 ) {
-    $modPf = ""
+    $modPf = "0"
     $modPd = "Jowleth"
-    $modCf = ""
+    $modCf = "0"
+    $modChk = "$modPd"
     $modName = "Ore Status"
     modState
 	}
   if ( $m2P -eq 8 ) {
+    $modPf = "TrollArmorRework.dll"
+    $modPd = "0"
+    $modCf = "StrykeDev.TrollArmorRework.cfg"
+    $modChk = "$modPf"
+    $modName = "Troll armor rework"
+    modState
+	}
+  if ( $m2P -eq 9 ) {
 		modMgmt
 	}
 }

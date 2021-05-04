@@ -1,0 +1,11 @@
+Valheim/BepInEx/plugins/*.vortex_backup
+Valheim/BepInEx/plugins/*/*.vortex_backup
+Valheim/BepInEx/plugins/*/*/*.vortex_backup
+Valheim/BepInEx/plugins/*/*/*/*.vortex_backup
+Valheim/BepInEx/plugins/*/__folder_managed_by_vortex
+Valheim/BepInEx/plugins/*/*/__folder_managed_by_vortex
+Valheim/BepInEx/plugins/*/*/*/__folder_managed_by_vortex
+Valheim/BepInEx/plugins/*/*/*/*/__folder_managed_by_vortex
+Valheim/BepInEx/plugins/ConfigurationManager
+Valheim/BepInEx/plugins/vortex*
+Valheim/BepInEx/config/com.bepis.bepinex.configurationmanager.cfg
