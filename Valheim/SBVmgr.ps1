@@ -101,31 +101,42 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.trashitems.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.trashitems.cfg" | Out-Null
 }
 
-function modMgmt {
-  clearText
-  echo "This menu will allow you to disable use of certain"
-  echo "non-critical modifications which will not dramatically"
-  echo "effect online gameplay to exclude."
-  echo ""
-  echo "You can also re-enable plugins which had been disabled"
-  echo "through this menu."
-  echo ""
-	$m1T = ""
-	$m1Q = "Select management mode:"
-	$m1O = '&Enable', '&Disable','&Main menu'
-	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 2)
+function modDsb {
+  if ( -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPf" ) -or
+       -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPd" ) ) {
+    echo "$modName has already been disabled."
+    pakPrompt
+    modSel
+  }
+  if ( -not ( Test-Path -Path "$modPath\BepInEx\DisabledPlugins" ) ) {
+    mkdir $modPath\BepInEx\disabledPlugins
+  }
+  if ( -not ( Test-Path -Path "$modPath\BepInEx\DisabledConfig" ) ) {
+    mkdir $modPath\BepInEx\disabledConfig
+  }
+  Move-Item -Path "$modPath\BepInEx\plugins\$modPf" -Destination "$modPath\BepInEx\disabledPlugins\$modPf"
+  Move-Item -Path "$modPath\BepInEx\plugins\$modPd" -Destination "$modPath\BepInEx\disabledPlugins\$modPd"
+  Move-Item -Path "$modPath\BepInEx\config\$modCf" -Destination "$modPath\BepInEx\disabledConfig\$modCf"
+  echo "$modName has been disabled."
+  echo "Re-enable it by changing management mode."
+  pakPrompt
+  modSel
+}
 
-	if ( $m1P -eq 0 ) {
-		$modMode = "modEnb"
+function modEnb {
+  if ( -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPf" ) -or
+       -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPd" ) ) {
+    echo "$modName is already enabled."
+    pakPrompt
     modSel
-	}
-	if ( $m1P -eq 1 ) {
-		$modMode = "modDsb"
-    modSel
-	}
-	if ( $m1P -eq 2 ) {
-		consent
-	}
+  }
+  Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPf" -Destination "$modPath\BepInEx\plugins\$modPf"
+  Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPd" -Destination "$modPath\BepInEx\plugins\$modPd"
+  Move-Item -Path "$modPath\BepInEx\disabledConfig\$modCf" -Destination "$modPath\BepInEx\config\$modCf"
+  echo "$modName has been enabled."
+  echo "Re-enable it by changing management mode."
+  pakPrompt
+  modSel
 }
 
 function modSel {
@@ -149,7 +160,7 @@ function modSel {
     $modPf = "FirstPersonValheimClientMod.dll"
     $modPd = ""
     $modCf = "com.loki.clientmods.valheim.firstperson.cfg"
-    $modName = "Loki/'s First Person Valheim'"
+    $modName = "Loki/'s First Person Valheim"
     $modMode
 	}
 	if ( $m2P -eq 2 ) {
@@ -199,40 +210,29 @@ function modSel {
 	}
 }
 
-function modDsb {
-  if ( -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPf" ) -or
-       -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPd" ) ) {
-    echo "$modName has already been disabled."
-    pakPrompt
-    modSel
-  }
-  if ( -not ( Test-Path -Path "$modPath\BepInEx\DisabledPlugins" ) ) {
-    mkdir $modPath\BepInEx\disabledPlugins
-  }
-  if ( -not ( Test-Path -Path "$modPath\BepInEx\DisabledConfig" ) ) {
-    mkdir $modPath\BepInEx\disabledConfig
-  }
-  Move-Item -Path "$modPath\BepInEx\plugins\$modPf" -Destination "$modPath\BepInEx\disabledPlugins\$modPf"
-  Move-Item -Path "$modPath\BepInEx\plugins\$modPd" -Destination "$modPath\BepInEx\disabledPlugins\$modPd"
-  Move-Item -Path "$modPath\BepInEx\config\$modCf" -Destination "$modPath\BepInEx\disabledConfig\$modCf"
-  echo "$modName has been disabled."
-  echo "Re-enable it by changing management mode."
-  pakPrompt
-  modSel
-}
+function modMgmt {
+  clearText
+  echo "This menu will allow you to disable use of certain"
+  echo "non-critical modifications which will not dramatically"
+  echo "effect online gameplay to exclude."
+  echo ""
+  echo "You can also re-enable plugins which had been disabled"
+  echo "through this menu."
+  echo ""
+	$m1T = ""
+	$m1Q = "Select management mode:"
+	$m1O = '&Enable', '&Disable','&Main menu'
+	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 2)
 
-function modEnb {
-  if ( -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPf" ) -or
-       -not ( Test-Path -Path "$modPath\BepInEx\disabledPlugins\$modPd" ) ) {
-    echo "$modName is already enabled."
-    pakPrompt
+	if ( $m1P -eq 0 ) {
+		Set-Variable -Name "modMode" -Value "modEnb" -Scope Script
     modSel
-  }
-  Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPf" -Destination "$modPath\BepInEx\plugins\$modPf"
-  Move-Item -Path "$modPath\BepInEx\disabledPlugins\$modPd" -Destination "$modPath\BepInEx\plugins\$modPd"
-  Move-Item -Path "$modPath\BepInEx\disabledConfig\$modCf" -Destination "$modPath\BepInEx\config\$modCf"
-  echo "$modName has been enabled."
-  echo "Re-enable it by changing management mode."
-  pakPrompt
-  modSel
+	}
+	if ( $m1P -eq 1 ) {
+		Set-Variable -Name "modMode" -Value "modDsb" -Scope Script
+    modSel
+	}
+	if ( $m1P -eq 2 ) {
+		consent
+	}
 }
