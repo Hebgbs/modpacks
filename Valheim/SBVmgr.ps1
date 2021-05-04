@@ -101,6 +101,15 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.trashitems.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.trashitems.cfg" | Out-Null
 }
 
+function modState {
+  if ( $modMode -eq 0 ) {
+    modEnb
+  }
+  if ( $modMode -eq 0 ) {
+    modDsb
+  }
+}
+
 function modDsb {
   if ( -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPf" ) -or
        -not ( Test-Path -Path "$modPath\BepInEx\Plugins\$modPd" ) ) {
@@ -154,56 +163,56 @@ function modSel {
     $modPd = ""
     $modCf = ""
     $modName = "$modPf"
-    $modMode
+    modState
 	}
 	if ( $m2P -eq 1 ) {
     $modPf = "FirstPersonValheimClientMod.dll"
     $modPd = ""
     $modCf = "com.loki.clientmods.valheim.firstperson.cfg"
     $modName = "Loki/'s First Person Valheim"
-    $modMode
+    modState
 	}
 	if ( $m2P -eq 2 ) {
     $modPf = "EmoteWheel.dll"
     $modPd = ""
     $modCf = "virtuacode.valheim.emotewheel.cfg"
     $modName = "Emote Wheel"
-    $modMode
+    modState
 	}
   if ( $m2P -eq 3 ) {
     $modPf = "EquipWheel*.dll"
     $modPd = ""
     $modCf = "virtuacode.valheim.equipwheel*.cfg"
     $modName = "Equip Wheels"
-    $modMode
+    modState
 	}
   if ( $m2P -eq 4 ) {
     $modPf = "ClockMod.dll"
     $modPd = ""
     $modCf = "aedenthorn.ClockMod.cfg"
     $modName = "Clock"
-    $modMode
+    modState
 	}
   if ( $m2P -eq 5 ) {
     $modPf = "Compass.dll"
     $modPd = "Compass"
     $modCf = "aedenthorn.Compass.cfg"
     $modName = "$modPd"
-    $modMode
+    modState
 	}
   if ( $m2P -eq 6 ) {
     $modPf = "FermenterStatus.dll"
     $modPd = ""
     $modCf = ""
     $modName = "Fermenter Status"
-    $modMode
+    modState
 	}
   if ( $m2P -eq 7 ) {
     $modPf = ""
     $modPd = "Jowleth"
     $modCf = ""
     $modName = "Ore Status"
-    $modMode
+    modState
 	}
   if ( $m2P -eq 8 ) {
 		modMgmt
@@ -225,11 +234,11 @@ function modMgmt {
 	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 2)
 
 	if ( $m1P -eq 0 ) {
-		Set-Variable -Name "modMode" -Value "modEnb" -Scope Script
+		Set-Variable -Name "modMode" -Value "0" -Scope Script
     modSel
 	}
 	if ( $m1P -eq 1 ) {
-		Set-Variable -Name "modMode" -Value "modDsb" -Scope Script
+		Set-Variable -Name "modMode" -Value "1" -Scope Script
     modSel
 	}
 	if ( $m1P -eq 2 ) {
