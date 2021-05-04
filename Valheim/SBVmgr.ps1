@@ -52,7 +52,7 @@ function modSel {
   echo ""
 	$m2T = ""
 	$m2Q = "Select modification:"
-	$m2O = 'Valheim&FPSBoost','1st-&Person mode','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','E&xit'
+	$m2O = 'ValheimFPS&Boost','1st-&Person mode','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','E&xit'
 	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 8)
 
 	if ( $m2P -eq 0 ) {
@@ -66,7 +66,7 @@ function modSel {
     $modPf = "FirstPersonValheimClientMod.dll"
     $modPd = ""
     $modCf = "com.loki.clientmods.valheim.firstperson.cfg"
-    $modName = "Loki/'s First Person Valheim"
+    $modName = "Loki's First Person Valheim"
     modState
 	}
 	if ( $m2P -eq 2 ) {
