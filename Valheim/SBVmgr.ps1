@@ -237,11 +237,6 @@ function mkLnOnce {
 function mkLn {
   # BepInEx and MMHookGem
     # Directories
-  echo "$repoPath\$repoBranch\doorstop_libs"
-  echo "$repoPath\$repoBranch\unstripped_corlib"
-  echo "$repoPath\$repoBranch\BepInEx\core"
-  echo "$repoPath\$repoBranch\BepInEx\patchers"
-  pause
   New-Item -Target "$repoPath\$repoBranch\doorstop_libs" -ItemType Junction -Path "$modPath\doorstop_libs" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\unstripped_corlib" -ItemType Junction -Path "$modPath\unstripped_corlib" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\core" -ItemType Junction -Path "$modPath\BepInEx\core" -ErrorAction SilentlyContinue | Out-Null
