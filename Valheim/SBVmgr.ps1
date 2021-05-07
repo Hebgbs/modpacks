@@ -207,10 +207,11 @@ function modMgmt {
 }
 
 function mkLnOnce {
+  # BepInEx plugin directories
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Compass" -ItemType Junction -Path "$modPath\BepInEx\plugins\Compass" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Jowleth" -ItemType Junction -Path "$modPath\BepInEx\plugins\Jowleth" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ValheimFPSBoost" -ItemType Junction -Path "$modPath\BepInEx\plugins\ValheimFPSBoost" -ErrorAction SilentlyContinue | Out-Null
-
+  # BepInEx plugins
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ClockMod.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ClockMod.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Compass.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Compass.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EmoteWheel.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EmoteWheel.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -221,7 +222,7 @@ function mkLnOnce {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\FermenterStatus.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\FermenterStatus.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\FirstPersonValheimClientMod.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\FirstPersonValheimClientMod.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\TrollArmorRework.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\TrollArmorRework.dll" -ErrorAction SilentlyContinue | Out-Null
-
+  # BepInEx configuration files
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.ClockMod.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.ClockMod.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.Compass.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.Compass.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.loki.clientmods.valheim.firstperson.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.loki.clientmods.valheim.firstperson.cfg" -ErrorAction SilentlyContinue | Out-Null
@@ -234,6 +235,24 @@ function mkLnOnce {
 }
 
 function mkLn {
+  # BepInEx and MMHookGem
+    # Directories
+  echo "$repoPath\$repoBranch\doorstop_libs"
+  echo "$repoPath\$repoBranch\unstripped_corlib"
+  echo "$repoPath\$repoBranch\BepInEx\core"
+  echo "$repoPath\$repoBranch\BepInEx\patchers"
+  pause
+  New-Item -Target "$repoPath\$repoBranch\doorstop_libs" -ItemType Junction -Path "$modPath\doorstop_libs" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\unstripped_corlib" -ItemType Junction -Path "$modPath\unstripped_corlib" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\BepInEx\core" -ItemType Junction -Path "$modPath\BepInEx\core" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\BepInEx\patchers" -ItemType Junction -Path "$modPath\BepInEx\patchers" -ErrorAction SilentlyContinue | Out-Null
+    # Files
+  New-Item -Target "$repoPath\$repoBranch\doorstop_config.ini" -ItemType SymbolicLink -Path "$modPath\doorstop_config.ini" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\start_game_bepinex.sh" -ItemType SymbolicLink -Path "$modPath\start_game_bepinex.sh" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\start_server_bepinex.sh" -ItemType SymbolicLink -Path "$modPath\start_server_bepinex.sh" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\winhttp.dll" -ItemType SymbolicLink -Path "$modPath\winhttp.dll" -ErrorAction SilentlyContinue | Out-Null
+    # config
+  # BepInEx plugin directories
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\assets" -ItemType Junction -Path "$modPath\BepInEx\plugins\assets" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BetterArchery" -ItemType Junction -Path "$modPath\BepInEx\plugins\BetterArchery" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\files" -ItemType Junction -Path "$modPath\BepInEx\plugins\files" -ErrorAction SilentlyContinue | Out-Null
@@ -242,7 +261,7 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MeadBaseIconFix" -ItemType Junction -Path "$modPath\BepInEx\plugins\MeadBaseIconFix" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\PotionsPlus" -ItemType Junction -Path "$modPath\BepInEx\plugins\PotionsPlus" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ValEx" -ItemType Junction -Path "$modPath\BepInEx\plugins\ValEx" -ErrorAction SilentlyContinue | Out-Null
-
+  # BepInEx plugins
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ABearCodes.Valheim.SimpleRecycling.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ABearCodes.Valheim.SimpleRecycling.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\AddAllFuel.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\AddAllFuel.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Advize_CartographySkill.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Advize_CartographySkill.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -281,7 +300,7 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\UseEquipmentInWater.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\UseEquipmentInWater.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\UsefulPaths.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\UsefulPaths.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\UsefulTrophies.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\UsefulTrophies.dll" -ErrorAction SilentlyContinue | Out-Null
-
+  # BepInEx configuration Files
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\advize.CartographySkill.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\advize.CartographySkill.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.AutoSplitStack.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.AutoSplitStack.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.InstantMonsterDrop.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.InstantMonsterDrop.cfg" -ErrorAction SilentlyContinue | Out-Null
