@@ -241,6 +241,7 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MasterChef" -ItemType Junction -Path "$modPath\BepInEx\plugins\MasterChef" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MeadBaseIconFix" -ItemType Junction -Path "$modPath\BepInEx\plugins\MeadBaseIconFix" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\PotionsPlus" -ItemType Junction -Path "$modPath\BepInEx\plugins\PotionsPlus" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ValEx" -ItemType Junction -Path "$modPath\BepInEx\plugins\ValEx" -ErrorAction SilentlyContinue | Out-Null
 
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ABearCodes.Valheim.SimpleRecycling.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ABearCodes.Valheim.SimpleRecycling.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\AddAllFuel.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\AddAllFuel.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -249,6 +250,7 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\AutoSplitStack.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\AutoSplitStack.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BetterLadders.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\BetterLadders.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BetterWagon.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\BetterWagon.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BuildExpansion.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\BuildExpansion.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\CookingSkill.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\CookingSkill.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EquipmentAndQuickSlots.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EquipmentAndQuickSlots.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ExploreTogether.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -296,6 +298,7 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\ishid4.mods.betterarchery.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\ishid4.mods.betterarchery.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\maximods.valheim.multicraft.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\maximods.valheim.multicraft.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\Menthus.bepinex.plugins.UsefulPaths.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\Menthus.bepinex.plugins.UsefulPaths.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\mixone.valheimplus.buildexpansion.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\mixone.valheimplus.buildexpansion.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\mkz.itemdrawers.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\mkz.itemdrawers.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\Necromancy.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\Necromancy.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$repoPath\$repoBranch\BepInEx\config\org.bepinex.plugins.valheim.quick_stack.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\org.bepinex.plugins.valheim.quick_stack.cfg" -ErrorAction SilentlyContinue | Out-Null
