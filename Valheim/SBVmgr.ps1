@@ -326,7 +326,7 @@ function mkLn {
   New-Item -Target "$cBPXsrc\flueno.MerchantWhereabouts.cfg" -ItemType SymbolicLink -Path "$cBPXdst\flueno.MerchantWhereabouts.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\gg.khairex.usefultrophies.cfg" -ItemType SymbolicLink -Path "$cBPXdst\gg.khairex.usefultrophies.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\GodSwordKG.cfg" -ItemType SymbolicLink -Path "$cBPXdst\GodSwordKG.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\HookGenPatcher.cfg" -ItemType SymbolicLink -Path "$cBPXdst\HookGenPatcher.cfg"
+  New-Item -Target "$cBPXsrc\HookGenPatcher.cfg" -ItemType SymbolicLink -Path "$cBPXdst\HookGenPatcher.cfg" | Out-Null
   New-Item -Target "$cBPXsrc\ishid4.mods.betterarchery.cfg" -ItemType SymbolicLink -Path "$cBPXdst\ishid4.mods.betterarchery.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\maximods.valheim.multicraft.cfg" -ItemType SymbolicLink -Path "$cBPXdst\maximods.valheim.multicraft.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\Menthus.bepinex.plugins.UsefulPaths.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Menthus.bepinex.plugins.UsefulPaths.cfg" -ErrorAction SilentlyContinue | Out-Null
