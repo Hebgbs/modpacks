@@ -279,6 +279,7 @@ function mkLn {
   New-Item -Target "$pBPXsrc\ExploreTogether.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\ExtendedItemDataFramework.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExtendedItemDataFramework.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\FarmGrid.dll" -ItemType SymbolicLink -Path "$pBPXdst\FarmGrid.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Fisticuffs.dll" -ItemType SymbolicLink -Path "$pBPXdst\Fisticuffs.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\GodSword.dll" -ItemType SymbolicLink -Path "$pBPXdst\GodSword.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\Gravekeeper.dll" -ItemType SymbolicLink -Path "$pBPXdst\Gravekeeper.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\HanticksRPChatMod1.0.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\HanticksRPChatMod1.0.0.dll" -ErrorAction SilentlyContinue | Out-Null
