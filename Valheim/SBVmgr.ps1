@@ -1,3 +1,9 @@
+# Shorten paths
+$pBPXsrc = "$repoPath\$repoBranch\BepInEx\plugins"
+$pBPXdst = "$modPath\BepInEx\plugins"
+$cBPXsrc = "$repoPath\$repoBranch\BepInEx\config"
+$cBPXdst = "$modPath\BepInEx\config"
+
 # Perform operations
 function chgState {
   if ( $modMode -eq 1 ) {
@@ -208,30 +214,30 @@ function modMgmt {
 
 function mkLnOnce {
   # BepInEx plugin directories
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Compass" -ItemType Junction -Path "$modPath\BepInEx\plugins\Compass" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Jowleth" -ItemType Junction -Path "$modPath\BepInEx\plugins\Jowleth" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ValheimFPSBoost" -ItemType Junction -Path "$modPath\BepInEx\plugins\ValheimFPSBoost" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Compass" -ItemType Junction -Path "$pBPXdst\Compass" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Jowleth" -ItemType Junction -Path "$pBPXdst\Jowleth" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ValheimFPSBoost" -ItemType Junction -Path "$pBPXdst\ValheimFPSBoost" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx plugins
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ClockMod.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ClockMod.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Compass.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Compass.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EmoteWheel.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EmoteWheel.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EquipWheel.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EquipWheel.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EquipWheelFour.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EquipWheelFour.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EquipWheelThree.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EquipWheelThree.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EquipWheelTwo.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EquipWheelTwo.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\FermenterStatus.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\FermenterStatus.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\FirstPersonValheimClientMod.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\FirstPersonValheimClientMod.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\TrollArmorRework.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\TrollArmorRework.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ClockMod.dll" -ItemType SymbolicLink -Path "$pBPXdst\ClockMod.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Compass.dll" -ItemType SymbolicLink -Path "$pBPXdst\Compass.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\EmoteWheel.dll" -ItemType SymbolicLink -Path "$pBPXdst\EmoteWheel.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\EquipWheel.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipWheel.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\EquipWheelFour.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipWheelFour.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\EquipWheelThree.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipWheelThree.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\EquipWheelTwo.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipWheelTwo.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\FermenterStatus.dll" -ItemType SymbolicLink -Path "$pBPXdst\FermenterStatus.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\FirstPersonValheimClientMod.dll" -ItemType SymbolicLink -Path "$pBPXdst\FirstPersonValheimClientMod.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\TrollArmorRework.dll" -ItemType SymbolicLink -Path "$pBPXdst\TrollArmorRework.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx configuration files
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.ClockMod.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.ClockMod.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.Compass.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.Compass.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.loki.clientmods.valheim.firstperson.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.loki.clientmods.valheim.firstperson.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.emotewheel.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.emotewheel.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.equipwheel.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.equipwheel.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.equipwheelfour.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.equipwheelfour.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.equipwheelthree.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.equipwheelthree.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.equipwheeltwo.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.equipwheeltwo.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\StrykeDev.TrollArmorRework.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\StrykeDev.TrollArmorRework.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\aedenthorn.ClockMod.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.ClockMod.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\aedenthorn.Compass.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.Compass.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\com.loki.clientmods.valheim.firstperson.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.loki.clientmods.valheim.firstperson.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\virtuacode.valheim.emotewheel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.emotewheel.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheel.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheelfour.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheelfour.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheelthree.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheelthree.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheeltwo.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheeltwo.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\StrykeDev.TrollArmorRework.cfg" -ItemType SymbolicLink -Path "$cBPXdst\StrykeDev.TrollArmorRework.cfg" -ErrorAction SilentlyContinue | Out-Null
 }
 
 function mkLn {
@@ -248,101 +254,101 @@ function mkLn {
   New-Item -Target "$repoPath\$repoBranch\winhttp.dll" -ItemType SymbolicLink -Path "$modPath\winhttp.dll" -ErrorAction SilentlyContinue | Out-Null
     # config
   # BepInEx plugin directories
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\assets" -ItemType Junction -Path "$modPath\BepInEx\plugins\assets" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BetterArchery" -ItemType Junction -Path "$modPath\BepInEx\plugins\BetterArchery" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\files" -ItemType Junction -Path "$modPath\BepInEx\plugins\files" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\FishFood" -ItemType Junction -Path "$modPath\BepInEx\plugins\FishFood" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MasterChef" -ItemType Junction -Path "$modPath\BepInEx\plugins\MasterChef" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MeadBaseIconFix" -ItemType Junction -Path "$modPath\BepInEx\plugins\MeadBaseIconFix" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MMHOOK" -ItemType Junction -Path "$modPath\BepInEx\plugins\MMHOOK" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\OdinArchitect" -ItemType Junction -Path "$modPath\BepInEx\plugins\OdinArchitect" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\PotionsPlus" -ItemType Junction -Path "$modPath\BepInEx\plugins\PotionsPlus" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\RuneSwords" -ItemType Junction -Path "$modPath\BepInEx\plugins\RuneSwords" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ValEx" -ItemType Junction -Path "$modPath\BepInEx\plugins\ValEx" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\assets" -ItemType Junction -Path "$pBPXdst\assets" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\BetterArchery" -ItemType Junction -Path "$pBPXdst\BetterArchery" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\files" -ItemType Junction -Path "$pBPXdst\files" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\FishFood" -ItemType Junction -Path "$pBPXdst\FishFood" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\MasterChef" -ItemType Junction -Path "$pBPXdst\MasterChef" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\MeadBaseIconFix" -ItemType Junction -Path "$pBPXdst\MeadBaseIconFix" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\MMHOOK" -ItemType Junction -Path "$pBPXdst\MMHOOK" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\OdinArchitect" -ItemType Junction -Path "$pBPXdst\OdinArchitect" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\PotionsPlus" -ItemType Junction -Path "$pBPXdst\PotionsPlus" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\RuneSwords" -ItemType Junction -Path "$pBPXdst\RuneSwords" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ValEx" -ItemType Junction -Path "$pBPXdst\ValEx" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx plugins
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ABearCodes.Valheim.SimpleRecycling.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ABearCodes.Valheim.SimpleRecycling.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\AddAllFuel.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\AddAllFuel.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Advize_CartographySkill.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Advize_CartographySkill.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\AnyPortal.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\AnyPortal.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\AutoSplitStack.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\AutoSplitStack.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BetterLadders.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\BetterLadders.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BetterWagon.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\BetterWagon.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\BuildExpansion.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\BuildExpansion.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\CookingSkill.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\CookingSkill.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\EquipmentAndQuickSlots.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\EquipmentAndQuickSlots.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ExploreTogether.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ExtendedItemDataFramework.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ExtendedItemDataFramework.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\FarmGrid.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\FarmGrid.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\GodSword.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\GodSword.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Gravekeeper.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Gravekeeper.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\HanticksRPChatMod1.0.0.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\HanticksRPChatMod1.0.0.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ImprovedBuildHud.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ImprovedBuildHud.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ImprovedSwimming.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ImprovedSwimming.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\InstantMonsterDrop.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\InstantMonsterDrop.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\itemdrawers.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\itemdrawers.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Jotunn.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Jotunn.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Jotunn.dll.mdb" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Jotunn.dll.mdb" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\JotunnLib.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\JotunnLib.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\LastUsedWeapons.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\LastUsedWeapons.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MeadBaseIconFix.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\MeadBaseIconFix.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MerchantWhereabouts.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\MerchantWhereabouts.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Moregates.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Moregates.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\MultiCraft.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\MultiCraft.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Necromancy.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Necromancy.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\NexusUpdate.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\NexusUpdate.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\NoStamCosts.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\NoStamCosts.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\OverheadAxeSwing.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\OverheadAxeSwing.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\QuickStack.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\QuickStack.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\RepairAll.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\RepairAll.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\SkillInjector.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\SkillInjector.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Skills Give More Carry Weight.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Skills Give More Carry Weight.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\skyheim.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\skyheim.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\ToastyTorches.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\ToastyTorches.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\TPWolves.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\TPWolves.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\TrashItems.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\TrashItems.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\UseEquipmentInWater.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\UseEquipmentInWater.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\UsefulPaths.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\UsefulPaths.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\UsefulTrophies.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\UsefulTrophies.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\plugins\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\plugins\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ABearCodes.Valheim.SimpleRecycling.dll" -ItemType SymbolicLink -Path "$pBPXdst\ABearCodes.Valheim.SimpleRecycling.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\AddAllFuel.dll" -ItemType SymbolicLink -Path "$pBPXdst\AddAllFuel.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Advize_CartographySkill.dll" -ItemType SymbolicLink -Path "$pBPXdst\Advize_CartographySkill.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\AnyPortal.dll" -ItemType SymbolicLink -Path "$pBPXdst\AnyPortal.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\AutoSplitStack.dll" -ItemType SymbolicLink -Path "$pBPXdst\AutoSplitStack.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\BetterLadders.dll" -ItemType SymbolicLink -Path "$pBPXdst\BetterLadders.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\BetterWagon.dll" -ItemType SymbolicLink -Path "$pBPXdst\BetterWagon.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\BuildExpansion.dll" -ItemType SymbolicLink -Path "$pBPXdst\BuildExpansion.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\CookingSkill.dll" -ItemType SymbolicLink -Path "$pBPXdst\CookingSkill.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\EquipmentAndQuickSlots.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipmentAndQuickSlots.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ExploreTogether.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ExtendedItemDataFramework.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExtendedItemDataFramework.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\FarmGrid.dll" -ItemType SymbolicLink -Path "$pBPXdst\FarmGrid.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\GodSword.dll" -ItemType SymbolicLink -Path "$pBPXdst\GodSword.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Gravekeeper.dll" -ItemType SymbolicLink -Path "$pBPXdst\Gravekeeper.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\HanticksRPChatMod1.0.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\HanticksRPChatMod1.0.0.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ImprovedBuildHud.dll" -ItemType SymbolicLink -Path "$pBPXdst\ImprovedBuildHud.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ImprovedSwimming.dll" -ItemType SymbolicLink -Path "$pBPXdst\ImprovedSwimming.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\InstantMonsterDrop.dll" -ItemType SymbolicLink -Path "$pBPXdst\InstantMonsterDrop.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\itemdrawers.dll" -ItemType SymbolicLink -Path "$pBPXdst\itemdrawers.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Jotunn.dll" -ItemType SymbolicLink -Path "$pBPXdst\Jotunn.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Jotunn.dll.mdb" -ItemType SymbolicLink -Path "$pBPXdst\Jotunn.dll.mdb" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\JotunnLib.dll" -ItemType SymbolicLink -Path "$pBPXdst\JotunnLib.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\LastUsedWeapons.dll" -ItemType SymbolicLink -Path "$pBPXdst\LastUsedWeapons.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\MeadBaseIconFix.dll" -ItemType SymbolicLink -Path "$pBPXdst\MeadBaseIconFix.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\MerchantWhereabouts.dll" -ItemType SymbolicLink -Path "$pBPXdst\MerchantWhereabouts.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Moregates.dll" -ItemType SymbolicLink -Path "$pBPXdst\Moregates.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\MultiCraft.dll" -ItemType SymbolicLink -Path "$pBPXdst\MultiCraft.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Necromancy.dll" -ItemType SymbolicLink -Path "$pBPXdst\Necromancy.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\NexusUpdate.dll" -ItemType SymbolicLink -Path "$pBPXdst\NexusUpdate.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\NoStamCosts.dll" -ItemType SymbolicLink -Path "$pBPXdst\NoStamCosts.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\OverheadAxeSwing.dll" -ItemType SymbolicLink -Path "$pBPXdst\OverheadAxeSwing.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\QuickStack.dll" -ItemType SymbolicLink -Path "$pBPXdst\QuickStack.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\RepairAll.dll" -ItemType SymbolicLink -Path "$pBPXdst\RepairAll.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\SkillInjector.dll" -ItemType SymbolicLink -Path "$pBPXdst\SkillInjector.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Skills Give More Carry Weight.dll" -ItemType SymbolicLink -Path "$pBPXdst\Skills Give More Carry Weight.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\skyheim.dll" -ItemType SymbolicLink -Path "$pBPXdst\skyheim.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\ToastyTorches.dll" -ItemType SymbolicLink -Path "$pBPXdst\ToastyTorches.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\TPWolves.dll" -ItemType SymbolicLink -Path "$pBPXdst\TPWolves.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\TrashItems.dll" -ItemType SymbolicLink -Path "$pBPXdst\TrashItems.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\UseEquipmentInWater.dll" -ItemType SymbolicLink -Path "$pBPXdst\UseEquipmentInWater.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\UsefulPaths.dll" -ItemType SymbolicLink -Path "$pBPXdst\UsefulPaths.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\UsefulTrophies.dll" -ItemType SymbolicLink -Path "$pBPXdst\UsefulTrophies.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$pBPXsrc\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx configuration Files
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\advize.CartographySkill.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\advize.CartographySkill.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.AutoSplitStack.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.AutoSplitStack.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\aedenthorn.InstantMonsterDrop.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\aedenthorn.InstantMonsterDrop.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\bakaSpaceman.LastUsedWeapons.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\bakaSpaceman.LastUsedWeapons.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\Basil_NoStamCosts.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\Basil_NoStamCosts.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\BepIn.Sarcen.FarmGrid.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\BepIn.Sarcen.FarmGrid.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\BepInEx.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\BepInEx.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.github.abearcodes.valheim.simplerecycling.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.github.abearcodes.valheim.simplerecycling.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.lvh-it.valheim.useequipmentinwater.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.lvh-it.valheim.useequipmentinwater.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.pipakin.SkillInjectorMod.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.pipakin.SkillInjectorMod.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.rolopogo.plugins.exploretogether.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.rolopogo.plugins.exploretogether.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\com.urgemeuwu.betterwagon.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\com.urgemeuwu.betterwagon.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\flueno.MerchantWhereabouts.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\flueno.MerchantWhereabouts.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\gg.khairex.usefultrophies.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\gg.khairex.usefultrophies.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\GodSwordKG.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\GodSwordKG.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\HookGenPatcher.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\HookGenPatcher.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\ishid4.mods.betterarchery.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\ishid4.mods.betterarchery.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\maximods.valheim.multicraft.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\maximods.valheim.multicraft.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\Menthus.bepinex.plugins.UsefulPaths.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\Menthus.bepinex.plugins.UsefulPaths.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\mixone.valheimplus.buildexpansion.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\mixone.valheimplus.buildexpansion.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\mkz.itemdrawers.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\mkz.itemdrawers.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\net.mtnewton.gravekeeper.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\net.mtnewton.gravekeeper.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\Necromancy.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\Necromancy.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\org.bepinex.plugins.valheim.quick_stack.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\org.bepinex.plugins.valheim.quick_stack.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\org.bepinex.valheim.displayinfo.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\org.bepinex.valheim.displayinfo.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\org.davidwofford.plugins.meadbaseiconfix.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\org.davidwofford.plugins.meadbaseiconfix.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\projjm.improvedswimming.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\projjm.improvedswimming.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\randyknapp.mods.epicloot.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\randyknapp.mods.epicloot.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\randyknapp.mods.equipmentandquickslots.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\randyknapp.mods.equipmentandquickslots.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\randyknapp.mods.extendeditemdataframework.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\randyknapp.mods.extendeditemdataframework.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\randyknapp.mods.improvedbuildhud.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\randyknapp.mods.improvedbuildhud.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\RepairAll.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\RepairAll.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\rin_jugatla.AddAllFuel.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\rin_jugatla.AddAllFuel.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\SkillsGiveMoreCarryWeight.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\SkillsGiveMoreCarryWeight.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\SSyl.FishFood.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\SSyl.FishFood.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\SSyl.ToastyTorches.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\SSyl.ToastyTorches.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\thegreyham.valheim.CookingSkill.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\thegreyham.valheim.CookingSkill.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\Toawy.TPWolves.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\Toawy.TPWolves.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\uk.co.jowleth.valheim.orestatus.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\uk.co.jowleth.valheim.orestatus.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$repoPath\$repoBranch\BepInEx\config\virtuacode.valheim.trashitems.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\config\virtuacode.valheim.trashitems.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\advize.CartographySkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\advize.CartographySkill.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\aedenthorn.AutoSplitStack.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.AutoSplitStack.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\aedenthorn.InstantMonsterDrop.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.InstantMonsterDrop.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\bakaSpaceman.LastUsedWeapons.cfg" -ItemType SymbolicLink -Path "$cBPXdst\bakaSpaceman.LastUsedWeapons.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\Basil_NoStamCosts.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Basil_NoStamCosts.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\BepIn.Sarcen.FarmGrid.cfg" -ItemType SymbolicLink -Path "$cBPXdst\BepIn.Sarcen.FarmGrid.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\BepInEx.cfg" -ItemType SymbolicLink -Path "$cBPXdst\BepInEx.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\com.github.abearcodes.valheim.simplerecycling.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.github.abearcodes.valheim.simplerecycling.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\com.lvh-it.valheim.useequipmentinwater.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.lvh-it.valheim.useequipmentinwater.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\com.pipakin.SkillInjectorMod.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.pipakin.SkillInjectorMod.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\com.rolopogo.plugins.exploretogether.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.rolopogo.plugins.exploretogether.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\com.urgemeuwu.betterwagon.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.urgemeuwu.betterwagon.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\flueno.MerchantWhereabouts.cfg" -ItemType SymbolicLink -Path "$cBPXdst\flueno.MerchantWhereabouts.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\gg.khairex.usefultrophies.cfg" -ItemType SymbolicLink -Path "$cBPXdst\gg.khairex.usefultrophies.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\GodSwordKG.cfg" -ItemType SymbolicLink -Path "$cBPXdst\GodSwordKG.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\HookGenPatcher.cfg" -ItemType SymbolicLink -Path "$cBPXdst\HookGenPatcher.cfg"
+  New-Item -Target "$cBPXsrc\ishid4.mods.betterarchery.cfg" -ItemType SymbolicLink -Path "$cBPXdst\ishid4.mods.betterarchery.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\maximods.valheim.multicraft.cfg" -ItemType SymbolicLink -Path "$cBPXdst\maximods.valheim.multicraft.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\Menthus.bepinex.plugins.UsefulPaths.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Menthus.bepinex.plugins.UsefulPaths.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\mixone.valheimplus.buildexpansion.cfg" -ItemType SymbolicLink -Path "$cBPXdst\mixone.valheimplus.buildexpansion.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\mkz.itemdrawers.cfg" -ItemType SymbolicLink -Path "$cBPXdst\mkz.itemdrawers.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\net.mtnewton.gravekeeper.cfg" -ItemType SymbolicLink -Path "$cBPXdst\net.mtnewton.gravekeeper.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\Necromancy.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Necromancy.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\org.bepinex.plugins.valheim.quick_stack.cfg" -ItemType SymbolicLink -Path "$cBPXdst\org.bepinex.plugins.valheim.quick_stack.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\org.bepinex.valheim.displayinfo.cfg" -ItemType SymbolicLink -Path "$cBPXdst\org.bepinex.valheim.displayinfo.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\org.davidwofford.plugins.meadbaseiconfix.cfg" -ItemType SymbolicLink -Path "$cBPXdst\org.davidwofford.plugins.meadbaseiconfix.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\projjm.improvedswimming.cfg" -ItemType SymbolicLink -Path "$cBPXdst\projjm.improvedswimming.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\randyknapp.mods.epicloot.cfg" -ItemType SymbolicLink -Path "$cBPXdst\randyknapp.mods.epicloot.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\randyknapp.mods.equipmentandquickslots.cfg" -ItemType SymbolicLink -Path "$cBPXdst\randyknapp.mods.equipmentandquickslots.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\randyknapp.mods.extendeditemdataframework.cfg" -ItemType SymbolicLink -Path "$cBPXdst\randyknapp.mods.extendeditemdataframework.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\randyknapp.mods.improvedbuildhud.cfg" -ItemType SymbolicLink -Path "$cBPXdst\randyknapp.mods.improvedbuildhud.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\RepairAll.cfg" -ItemType SymbolicLink -Path "$cBPXdst\RepairAll.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\rin_jugatla.AddAllFuel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\rin_jugatla.AddAllFuel.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\SkillsGiveMoreCarryWeight.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SkillsGiveMoreCarryWeight.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\SSyl.FishFood.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SSyl.FishFood.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\SSyl.ToastyTorches.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SSyl.ToastyTorches.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\thegreyham.valheim.CookingSkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\thegreyham.valheim.CookingSkill.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\Toawy.TPWolves.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Toawy.TPWolves.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\uk.co.jowleth.valheim.orestatus.cfg" -ItemType SymbolicLink -Path "$cBPXdst\uk.co.jowleth.valheim.orestatus.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\virtuacode.valheim.trashitems.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.trashitems.cfg" -ErrorAction SilentlyContinue | Out-Null
 }
