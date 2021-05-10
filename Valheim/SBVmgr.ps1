@@ -323,9 +323,6 @@ function mkLn {
   New-Item -Target "$pBPXsrc\QuickStack.dll" -ItemType SymbolicLink -Path "$pBPXdst\QuickStack.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\README" -ItemType SymbolicLink -Path "$pBPXdst\README" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\RepairAll.dll" -ItemType SymbolicLink -Path "$pBPXdst\RepairAll.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\RuneSwords" -ItemType SymbolicLink -Path "$pBPXdst\RuneSwords" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\SkillInjector.dll" -ItemType SymbolicLink -Path "$pBPXdst\SkillInjector.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\Skills" -ItemType SymbolicLink -Path "$pBPXdst\Skills" -ErrorAction SilentlyContinue | Out-Null
@@ -337,13 +334,9 @@ function mkLn {
   New-Item -Target "$pBPXsrc\UsefulPaths.dll" -ItemType SymbolicLink -Path "$pBPXdst\UsefulPaths.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\UsefulTrophies.dll" -ItemType SymbolicLink -Path "$pBPXdst\UsefulTrophies.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\ValEx" -ItemType SymbolicLink -Path "$pBPXdst\ValEx" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$pBPXsrc\Valheim.CustomRaids.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.CustomRaids.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\ValheimFPSBoost" -ItemType SymbolicLink -Path "$pBPXdst\ValheimFPSBoost" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$pBPXsrc\Valheim.SpawnThat.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx configuration Files
-  New-Item -Target "$pBPXsrc\AshLand Monsters" -ItemType Junction -Path "$pBPXdst\AshLand Monsters" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$pBPXsrc\Ocean Monsters" -ItemType Junction -Path "$pBPXdst\Ocean Monsters" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\advize.CartographySkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\advize.CartographySkill.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\aedenthorn.AutoSplitStack.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.AutoSplitStack.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\aedenthorn.InstantMonsterDrop.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.InstantMonsterDrop.cfg" -ErrorAction SilentlyContinue | Out-Null
@@ -352,19 +345,11 @@ function mkLn {
   New-Item -Target "$cBPXsrc\Basil_NoStamCosts.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Basil_NoStamCosts.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\BepInEx.cfg" -ItemType SymbolicLink -Path "$cBPXdst\BepInEx.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\BepIn.Sarcen.FarmGrid.cfg" -ItemType SymbolicLink -Path "$cBPXdst\BepIn.Sarcen.FarmGrid.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\com.alexanderstrada.rrrbetterraids.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.alexanderstrada.rrrbetterraids.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\com.alexanderstrada.rrrmonsters.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.alexanderstrada.rrrmonsters.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\com.github.abearcodes.valheim.simplerecycling.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.github.abearcodes.valheim.simplerecycling.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\com.lvh-it.valheim.useequipmentinwater.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.lvh-it.valheim.useequipmentinwater.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\com.pipakin.SkillInjectorMod.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.pipakin.SkillInjectorMod.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\com.rolopogo.plugins.exploretogether.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.rolopogo.plugins.exploretogether.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\com.urgemeuwu.betterwagon.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.urgemeuwu.betterwagon.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\custom_raids.cfg" -ItemType SymbolicLink -Path "$cBPXdst\custom_raids.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\custom_raids.supplemental.DammedEncounter.cfg" -ItemType SymbolicLink -Path "$cBPXdst\custom_raids.supplemental.DammedEncounter.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\custom_raids.supplemental.deathsquitoseason.cfg" -ItemType SymbolicLink -Path "$cBPXdst\custom_raids.supplemental.deathsquitoseason.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\custom_raids.supplemental.FireNeckHerd.cfg" -ItemType SymbolicLink -Path "$cBPXdst\custom_raids.supplemental.FireNeckHerd.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\custom_raids.supplemental.ragnarok.cfg" -ItemType SymbolicLink -Path "$cBPXdst\custom_raids.supplemental.ragnarok.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\custom_raids.supplemental.SurlingSurge.cfg" -ItemType SymbolicLink -Path "$cBPXdst\custom_raids.supplemental.SurlingSurge.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\flueno.MerchantWhereabouts.cfg" -ItemType SymbolicLink -Path "$cBPXdst\flueno.MerchantWhereabouts.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\gg.khairex.usefultrophies.cfg" -ItemType SymbolicLink -Path "$cBPXdst\gg.khairex.usefultrophies.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\GodSwordKG.cfg" -ItemType SymbolicLink -Path "$cBPXdst\GodSwordKG.cfg" -ErrorAction SilentlyContinue | Out-Null
@@ -388,10 +373,6 @@ function mkLn {
   New-Item -Target "$cBPXsrc\RepairAll.cfg" -ItemType SymbolicLink -Path "$cBPXdst\RepairAll.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\rin_jugatla.AddAllFuel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\rin_jugatla.AddAllFuel.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\SkillsGiveMoreCarryWeight.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SkillsGiveMoreCarryWeight.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\spawn_that.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\spawn_that.local_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.local_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\spawn_that.world_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\spawn_that.world_spawners.ocean.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ocean.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\SSyl.FishFood.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SSyl.FishFood.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\SSyl.ToastyTorches.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SSyl.ToastyTorches.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\thegreyham.valheim.CookingSkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\thegreyham.valheim.CookingSkill.cfg" -ErrorAction SilentlyContinue | Out-Null
