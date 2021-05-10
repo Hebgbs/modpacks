@@ -96,8 +96,8 @@ function modSel {
 	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
 
   if ( $m2P -eq 0 ) {
-    $modPf = "ValheimFPSBoost"
-    $modPd = "0"
+    $modPf = "0"
+    $modPd = "ValheimFPSBoost"
     $modCf = "0"
     $modChk = "$modPd"
     $modName = "$modPd"
@@ -107,7 +107,7 @@ function modSel {
     $modPf = "FirstPersonValheimClientMod"
     $modPd = "0"
     $modCf = "com.loki.clientmods.valheim.firstperson"
-    $modChk = "$modPd"
+    $modChk = "$modPf."
     $modName = "Loki's First Person Valheim"
     chgState
   }
@@ -115,7 +115,7 @@ function modSel {
     $modPf = "EmoteWheel"
     $modPd = "0"
     $modCf = "virtuacode.valheim.emotewheel"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "Emote Wheel"
     chgState
   }
@@ -123,7 +123,7 @@ function modSel {
     $modPf = "EquipWheel"
     $modPd = "0"
     $modCf = "virtuacode.valheim.equipwheel"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "Equip Wheels"
     chgState
   }
@@ -131,7 +131,7 @@ function modSel {
     $modPf = "ClockMod"
     $modPd = "0"
     $modCf = "aedenthorn.ClockMod"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "Clock"
     chgState
   }
@@ -139,7 +139,7 @@ function modSel {
     $modPf = "Compass"
     $modPd = "Compass"
     $modCf = "aedenthorn.Compass"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "$modPd"
     chgState
   }
@@ -147,7 +147,7 @@ function modSel {
     $modPf = "FermenterStatus"
     $modPd = "0"
     $modCf = "0"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "Fermenter Status"
     chgState
   }
@@ -163,7 +163,7 @@ function modSel {
     $modPf = "TrollArmorRework"
     $modPd = "0"
     $modCf = "StrykeDev.TrollArmorRework"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "Troll armor rework"
     chgState
   }
@@ -171,7 +171,7 @@ function modSel {
     $modPf = "MovableInventoryWindows"
     $modPd = "0"
     $modCf = "aedenthorn.MovableInventoryWindows"
-    $modChk = "$modPf"
+    $modChk = "$modPf.dll"
     $modName = "Movable inventory windows"
     chgState
   }
