@@ -92,7 +92,7 @@ function modSel {
   clearText
 	$m2T = ""
 	$m2Q = "Select modification to ${mgrWord}:"
-	$m2O = 'ValheimFPS&Boost','&1st-Person camera','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','&Troll armor rework','E&xit'
+	$m2O = 'ValheimFPS&Boost','&1st-Person camera','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','&Troll armor rework','&Movable inventory windows','E&xit'
 	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
 
   if ( $m2P -eq 0 ) {
@@ -172,7 +172,7 @@ function modSel {
     $modPd = "0"
     $modCf = "aedenthorn.MovableInventoryWindows"
     $modChk = "$modPf"
-    $modName = "Movable Inventory Windows"
+    $modName = "Movable inventory windows"
     chgState
   }
   if ( $m2P -eq 10 ) {
