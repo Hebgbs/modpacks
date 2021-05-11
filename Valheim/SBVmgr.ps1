@@ -107,7 +107,7 @@ function modSel {
     $modPf = "FirstPersonValheimClientMod"
     $modPd = "0"
     $modCf = "com.loki.clientmods.valheim.firstperson"
-    $modChk = "$modPf.dll"
+    $modChk = "$modPf."
     $modName = "Loki's First Person Valheim"
     chgState
   }
