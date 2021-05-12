@@ -13,3 +13,4 @@ Valheim/BepInEx/patchers/BepInEx.MonoMod.HookGenPatcher/__folder_managed_by_vort
 Valheim/BepInEx/config/*/__folder_managed_by_vortex
 *.vortex_lnk
 Valheim/BepInEx/plugins/README
+Valheim/BepInEx/plugins/MMHOOK
