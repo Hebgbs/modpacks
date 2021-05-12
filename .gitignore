@@ -12,3 +12,4 @@ Valheim/BepInEx/config/com.bepis.bepinex.configurationmanager.cfg
 Valheim/BepInEx/patchers/BepInEx.MonoMod.HookGenPatcher/__folder_managed_by_vortex
 Valheim/BepInEx/config/*/__folder_managed_by_vortex
 *.vortex_lnk
+Valheim/BepInEx/plugins/README
