@@ -284,6 +284,7 @@ function mkLn {
   New-item -Target "$pBPXsrc\BetterWagon.dll" -ItemType SymbolicLink -Path "$pBPXdst\BetterWagon.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\BuildExpansion.dll" -ItemType SymbolicLink -Path "$pBPXdst\BuildExpansion.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\CookingSkill.dll" -ItemType SymbolicLink -Path "$pBPXdst\CookingSkill.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\EquipmentAndQuickSlots.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipmentAndQuickSlots.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\ExploreTogether.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\ExtendedItemDataFramework.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExtendedItemDataFramework.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\FarmGrid.dll" -ItemType SymbolicLink -Path "$pBPXdst\FarmGrid.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -315,7 +316,7 @@ function mkLn {
   New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RRRNpcs_0.2.2.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs_0.2.2.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\SkillInjector.dll" -ItemType SymbolicLink -Path "$pBPXdst\SkillInjector.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\Skills" -ItemType SymbolicLink -Path "$pBPXdst\Skills" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\Skills Give More Carry Weight.dll" -ItemType SymbolicLink -Path "$pBPXdst\Skills Give More Carry Weight.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\skyheim.dll" -ItemType SymbolicLink -Path "$pBPXdst\skyheim.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\ToastyTorches.dll" -ItemType SymbolicLink -Path "$pBPXdst\ToastyTorches.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\TPWolves.dll" -ItemType SymbolicLink -Path "$pBPXdst\TPWolves.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -327,12 +328,11 @@ function mkLn {
   New-item -Target "$pBPXsrc\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\Valheim.SpawnThat.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx configuration directories
-  New-item -Target "$cBPXsrc\" -ItemType Junction -Path "$cBPXdst\" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\AshLand" -ItemType Junction -Path "$cBPXdst\AshLand" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$cBPXsrc\AshLand Monsters" -ItemType Junction -Path "$cBPXdst\AshLand Monsters" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\custom_raids.supplemental.Ashlands" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Ashlands" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\custom_raids.supplemental.Svartalfar" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Svartalfar" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\Ocean" -ItemType Junction -Path "$cBPXdst\Ocean" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\Svartalfar" -ItemType Junction -Path "$cBPXdst\Svartalfar" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$cBPXsrc\Ocean Monsters" -ItemType Junction -Path "$cBPXdst\Ocean Monsters" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$cBPXsrc\Svartalfar Monsters" -ItemType Junction -Path "$cBPXdst\Svartalfar Monsters" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx configuration
   New-item -Target "$cBPXsrc\advize.CartographySkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\advize.CartographySkill.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\aedenthorn.AutoSplitStack.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.AutoSplitStack.cfg" -ErrorAction SilentlyContinue | Out-Null
