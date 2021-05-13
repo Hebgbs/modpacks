@@ -14,3 +14,11 @@ Valheim/BepInEx/config/*/__folder_managed_by_vortex
 *.vortex_lnk
 Valheim/BepInEx/plugins/README
 Valheim/BepInEx/plugins/MMHOOK
+Valheim/BepInEx/config/bakaSpaceman.LastUsedWeapons.cfg
+Valheim/BepInEx/config/net.mtnewton.gravekeeper.cfg
+Valheim/BepInEx/config/randyknapp.mods.equipmentandquickslots.cfg
+Valheim/BepInEx/config/virtuacode.valheim.emotewheel.cfg
+Valheim/BepInEx/config/virtuacode.valheim.equipwheel.cfg
+Valheim/BepInEx/config/virtuacode.valheim.equipwheelfour.cfg
+Valheim/BepInEx/config/virtuacode.valheim.equipwheelthree.cfg
+Valheim/BepInEx/config/virtuacode.valheim.equipwheeltwo.cfg
