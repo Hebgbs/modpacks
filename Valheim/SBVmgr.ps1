@@ -101,7 +101,6 @@ function modSel {
     $modCf = "0"
     $modChk = "$modPd"
     $modName = "$modPd"
-    chgState
   }
   if ( $m2P -eq 1 ) {
     $modPf = "FirstPersonValheimClientMod"
@@ -109,7 +108,6 @@ function modSel {
     $modCf = "com.loki.clientmods.valheim.firstperson"
     $modChk = "$modPf."
     $modName = "Loki's First Person Valheim"
-    chgState
   }
   if ( $m2P -eq 2 ) {
     $modPf = "EmoteWheel"
@@ -117,7 +115,6 @@ function modSel {
     $modCf = "virtuacode.valheim.emotewheel"
     $modChk = "$modPf.dll"
     $modName = "Emote Wheel"
-    chgState
   }
   if ( $m2P -eq 3 ) {
     $modPf = "EquipWheel"
@@ -125,7 +122,6 @@ function modSel {
     $modCf = "virtuacode.valheim.equipwheel"
     $modChk = "$modPf.dll"
     $modName = "Equip Wheels"
-    chgState
   }
   if ( $m2P -eq 4 ) {
     $modPf = "ClockMod"
@@ -133,7 +129,6 @@ function modSel {
     $modCf = "aedenthorn.ClockMod"
     $modChk = "$modPf.dll"
     $modName = "Clock"
-    chgState
   }
   if ( $m2P -eq 5 ) {
     $modPf = "Compass"
@@ -141,7 +136,6 @@ function modSel {
     $modCf = "aedenthorn.Compass"
     $modChk = "$modPf.dll"
     $modName = "$modPd"
-    chgState
   }
   if ( $m2P -eq 6 ) {
     $modPf = "FermenterStatus"
@@ -149,7 +143,6 @@ function modSel {
     $modCf = "0"
     $modChk = "$modPf.dll"
     $modName = "Fermenter Status"
-    chgState
   }
   if ( $m2P -eq 7 ) {
     $modPf = "0"
@@ -157,7 +150,6 @@ function modSel {
     $modCf = "uk.co.jowleth.valheim.orestatus.cfg"
     $modChk = "$modPd"
     $modName = "Ore Status"
-    chgState
   }
   if ( $m2P -eq 8 ) {
     $modPf = "TrollArmorRework"
@@ -165,7 +157,6 @@ function modSel {
     $modCf = "StrykeDev.TrollArmorRework"
     $modChk = "$modPf.dll"
     $modName = "Troll armor rework"
-    chgState
   }
   if ( $m2P -eq 9 ) {
     $modPf = "MovableInventoryWindows"
@@ -173,11 +164,11 @@ function modSel {
     $modCf = "aedenthorn.MovableInventoryWindows"
     $modChk = "$modPf.dll"
     $modName = "Movable inventory windows"
-    chgState
   }
   if ( $m2P -eq 10 ) {
 		modMgmt
 	}
+  chgState
 }
 
 # User-interactive mod managament menu
