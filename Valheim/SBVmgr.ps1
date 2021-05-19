@@ -14,29 +14,48 @@ function chgState {
       mkdir $modPath\BepInEx\$cMgrDst -ErrorAction SilentlyContinue | Out-Null
     }
   }
-  if ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\$modChk" ) {
-    echo "$modName has already been ${mgrWord}d."
-    pakPrompt
-    modSel
-  }
-  if ( $modPf.dll -ne 0 ) {
-    if ( ( $modMode -eq 0 ) -and
-       ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPf.dll" ) ) -and
-       ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\$modPf.dll" ) ) ) {
-      New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\$modPf.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\$modPf.dll" -ErrorAction SilentlyContinue | Out-Null
-    }
-    if ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPf.dll" ) {
-      Move-Item -Path "$modPath\BepInEx\$pMgrSrc\$modPf.dll" -Destination "$modPath\BepInEx\$pMgrDst\$modPf.dll"
+  if ( $modMode -lt 2 ) {
+    if ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\$modChk" ) {
+      Write-Host "$modName has already been ${mgrWord}d." -Foreground "yellow"
+      pakPrompt
+      modSel
     }
   }
-  if ( $modPd -ne 0 ) {
-    if ( ( $modMode -eq 0 ) -and
-       ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPd" ) ) -and
-       ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\$modPd" ) ) ) {
-      New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\$modPd" -ItemType Junction -Path "$modPath\BepInEx\$pMgrDst\$modPd" -ErrorAction SilentlyContinue | Out-Null
+  if ( $modMode -eq 2 ) {
+    if ( Test-Path -Path "$modPath\BepInEx\$cMgrDst\$modCf.cfg" ) {
+      Write-Host "$modName has been disabled!" -Foreground "red" -BackgroundColor "black"
+      Write-Host "Enable before editing!" -Foreground "red" -BackgroundColor "black"
+      pakPrompt
+      modMgmt
     }
-    if ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPd" ) {
-      Move-Item -Path "$modPath\BepInEx\$pMgrSrc\$modPd" -Destination "$modPath\BepInEx\$pMgrDst\$modPd"
+    if ( -not ( Test-Path -Path "$modPath\BepInEx\$cMgrDst\$modCf.cfg" ) -and
+       ( -not ( Test-Path -Path "$modPath\BepInEx\$cMgrSrc\$modCf.cfg" ) ) ) {
+      Write-Host "$modName has not been enabled! This may" -Foreground "red" -BackgroundColor "black"
+      Write-Host "be due to it being a new option. Enable before editing!" -Foreground "red" -BackgroundColor "black"
+      pakPrompt
+      modMgmt
+    }
+  }
+  if ( $modMode -ne 2 ) {
+    if ( $modPf.dll -ne 0 ) {
+      if ( ( $modMode -eq 0 ) -and
+         ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPf.dll" ) ) -and
+         ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\$modPf.dll" ) ) ) {
+        New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\$modPf.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\$modPf.dll" -ErrorAction SilentlyContinue | Out-Null
+      }
+      if ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPf.dll" ) {
+        Move-Item -Path "$modPath\BepInEx\$pMgrSrc\$modPf.dll" -Destination "$modPath\BepInEx\$pMgrDst\$modPf.dll"
+      }
+    }
+    if ( $modPd -ne 0 ) {
+      if ( ( $modMode -eq 0 ) -and
+         ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPd" ) ) -and
+         ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\$modPd" ) ) ) {
+        New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\$modPd" -ItemType Junction -Path "$modPath\BepInEx\$pMgrDst\$modPd" -ErrorAction SilentlyContinue | Out-Null
+      }
+      if ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\$modPd" ) {
+        Move-Item -Path "$modPath\BepInEx\$pMgrSrc\$modPd" -Destination "$modPath\BepInEx\$pMgrDst\$modPd"
+      }
     }
   }
   if ( $modCf.cfg -ne 0 ) {
@@ -46,21 +65,32 @@ function chgState {
       New-Item -Target "$repoPath\$repoBranch\BepInEx\$cMgrDst\$modCf.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\$cMgrDst\$modCf.cfg" -ErrorAction SilentlyContinue | Out-Null
     }
     if ( Test-Path -Path "$modPath\BepInEx\$cMgrSrc\$modCf.cfg" ) {
-      Move-Item -Path "$modPath\BepInEx\$cMgrSrc\$modCf.cfg" -Destination "$modPath\BepInEx\$cMgrDst\$modCf.cfg"
+      if ( $modMode -ne 2 ) {
+        Move-Item -Path "$modPath\BepInEx\$cMgrSrc\$modCf.cfg" -Destination "$modPath\BepInEx\$cMgrDst\$modCf.cfg"
+      }
+      if ( $modMode -eq 2 ) {
+        $reparseTest = (get-item $modPath\BepInEx\$cMgrSrc\$modCf.cfg).Attributes.ToString() -match "ReparsePoint"
+        if ( $reparseTest -match "True" ) {
+          Remove-Item $modPath\BepInEx\$cMgrSrc\$modCf.cfg
+          Copy-Item "$repoPath\$repoBranch\BepInEx\$cMgrSrc\$modCf.cfg" -Destination "$modPath\BepInEx\$cMgrSrc\$modCf.cfg"
+        }
+      }
     }
   }
   if ( $m2P -eq 3 ) {
-    if ( ( $modMode -eq 0 ) -and
-       ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\${modPf}four.dll" ) ) -and
-       ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\${modPf}four.dll" ) ) ) {
-      New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\${modPf}two.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\${modPf}two.dll" -ErrorAction SilentlyContinue | Out-Null
-      New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\${modPf}three.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\${modPf}three.dll" -ErrorAction SilentlyContinue | Out-Null
-      New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\${modPf}four.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\${modPf}four.dll" -ErrorAction SilentlyContinue | Out-Null
-    }
-    if ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\${modPf}four.dll" ) {
-      Move-Item -Path "$modPath\BepInEx\$pMgrSrc\${modPf}two.dll" -Destination "$modPath\BepInEx\$pMgrDst\${modPf}two.dll"
-      Move-Item -Path "$modPath\BepInEx\$pMgrSrc\${modPf}three.dll" -Destination "$modPath\BepInEx\$pMgrDst\${modPf}three.dll"
-      Move-Item -Path "$modPath\BepInEx\$pMgrSrc\${modPf}four.dll" -Destination "$modPath\BepInEx\$pMgrDst\${modPf}four.dll"
+    if ( $modMode -ne 2 ) {
+      if ( ( $modMode -eq 0 ) -and
+         ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\${modPf}four.dll" ) ) -and
+         ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\${modPf}four.dll" ) ) ) {
+        New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\${modPf}two.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\${modPf}two.dll" -ErrorAction SilentlyContinue | Out-Null
+        New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\${modPf}three.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\${modPf}three.dll" -ErrorAction SilentlyContinue | Out-Null
+        New-Item -Target "$repoPath\$repoBranch\BepInEx\$pMgrDst\${modPf}four.dll" -ItemType SymbolicLink -Path "$modPath\BepInEx\$pMgrDst\${modPf}four.dll" -ErrorAction SilentlyContinue | Out-Null
+      }
+      if ( Test-Path -Path "$modPath\BepInEx\$pMgrSrc\${modPf}four.dll" ) {
+        Move-Item -Path "$modPath\BepInEx\$pMgrSrc\${modPf}two.dll" -Destination "$modPath\BepInEx\$pMgrDst\${modPf}two.dll"
+        Move-Item -Path "$modPath\BepInEx\$pMgrSrc\${modPf}three.dll" -Destination "$modPath\BepInEx\$pMgrDst\${modPf}three.dll"
+        Move-Item -Path "$modPath\BepInEx\$pMgrSrc\${modPf}four.dll" -Destination "$modPath\BepInEx\$pMgrDst\${modPf}four.dll"
+      }
     }
     if ( ( $modMode -eq 0 ) -and
        ( -not ( Test-Path -Path "$modPath\BepInEx\$cMgrSrc\${modCf}four.cfg" ) ) -and
@@ -70,18 +100,320 @@ function chgState {
       New-Item -Target "$repoPath\$repoBranch\BepInEx\$cMgrDst\${modCf}four.cfg" -ItemType SymbolicLink -Path "$modPath\BepInEx\$cMgrDst\${modCf}four.cfg" -ErrorAction SilentlyContinue | Out-Null
     }
     if ( Test-Path -Path "$modPath\BepInEx\$cMgrSrc\${modCf}four.cfg" ) {
-      Move-Item -Path "$modPath\BepInEx\$cMgrSrc\${modCf}two.cfg" -Destination "$modPath\BepInEx\$cMgrDst\${modCf}two.cfg"
-      Move-Item -Path "$modPath\BepInEx\$cMgrSrc\${modCf}three.cfg" -Destination "$modPath\BepInEx\$cMgrDst\${modCf}three.cfg"
-      Move-Item -Path "$modPath\BepInEx\$cMgrSrc\${modCf}four.cfg" -Destination "$modPath\BepInEx\$cMgrDst\${modCf}four.cfg"
+      if ( $modMode -ne 2 ) {
+        Move-Item -Path "$modPath\BepInEx\$cMgrSrc\${modCf}two.cfg" -Destination "$modPath\BepInEx\$cMgrDst\${modCf}two.cfg"
+        Move-Item -Path "$modPath\BepInEx\$cMgrSrc\${modCf}three.cfg" -Destination "$modPath\BepInEx\$cMgrDst\${modCf}three.cfg"
+        Move-Item -Path "$modPath\BepInEx\$cMgrSrc\${modCf}four.cfg" -Destination "$modPath\BepInEx\$cMgrDst\${modCf}four.cfg"
+      }
+      if ( $modMode -eq 2 ) {
+        $reparseTest = (get-item $modPath\BepInEx\$cMgrSrc\${modCf}four.cfg).Attributes.ToString() -match "ReparsePoint"
+        if ( $reparseTest -match "True" ) {
+          Rename-Item "$modPath\BepInEx\$cMgrSrc\$modCf.cfg" -NewName "$modPath\BepInEx\$cMgrSrc\_$modCf.cfg"
+          Remove-Item "$modPath\BepInEx\$cMgrSrc\${modCf}*.cfg"
+          Copy-Item "$repoPath\$repoBranch\BepInEx\$cMgrSrc\${modCf}two.cfg" -Destination "$modPath\BepInEx\$cMgrSrc\${modCf}two.cfg"
+          Copy-Item "$repoPath\$repoBranch\BepInEx\$cMgrSrc\${modCf}three.cfg" -Destination "$modPath\BepInEx\$cMgrSrc\${modCf}three.cfg"
+          Copy-Item "$repoPath\$repoBranch\BepInEx\$cMgrSrc\${modCf}four.cfg" -Destination "$modPath\BepInEx\$cMgrSrc\${modCf}four.cfg"
+          Rename-Item "$modPath\BepInEx\$cMgrSrc\_$modCf.cfg" -NewName "$modPath\BepInEx\$cMgrSrc\$modCf.cfg"
+        }
+      }
     }
   }
+  if ( $modMode -ne 2 ) {
+    chgFin
+  }
+  if ( $modMode -eq 2 ) {
+    cfgChangeMenu
+  }
+}
+
+function cfgChangeMenu {
+  $keyQ = "Key to use for"
+  $defCfgMsg = "Now defining configuration for"
+  clearText
+  if ( $modMsg -ne 0 ) {
+    if ( $m2P -eq 2 ) {
+      echo "This modification is known to be problematic for"
+      echo "some individuals. If you consider use of this plugin"
+      echo "an issue, then elect to disable this plugin instead."
+      echo ""
+      echo "For key reference to use with the two options below,"
+      echo "visit https://docs.unity3d.com/Manual/class-InputManager.html"
+    }
+  }
+  clearText
+  $m3T = ""
+  if ( $m2P -eq 3 ) {
+    $m3Q = "Select which Equip Wheel to ${mgrWord}:"
+  }
+  else {
+    $m3Q = "Select property for $modName to ${mgrWord}:"
+  }
+  if ( $m2P -eq 0 ) {
+    $m3O = 'Armour &colour','&Muddiness','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
+  }
+  if ( $m2P -eq 1 ) {
+    $m3O = '&Camera reset key','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
+  }
+  if ( $m2P -eq 2 ) {
+    $m3O = '&1st modifier key','&2nd modifier key','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
+  }
+  if ( $m2P -eq 3 ) {
+    $m3O = 'Equip Wheel &1','Equip Wheel &2','Equip Wheel &3','Equip Wheel &4','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 4)
+  }
+  if ( $m2P -eq 4 ) {
+    $m3O = 'Item &highlight colour','&Keyboard binding','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
+  }
+  if ( $m2P -eq 5 ) {
+    $m3O = 'Key &binding','Key &alias','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
+  }
+  # All of the conditions for exiting the menu.
+  if ( ( ( $m2P -eq 3 ) -and ( $m3P -eq 4 ) ) -or
+     ( ( ( $m2P -eq 0 ) -or ( $m2P -eq 2 ) -or ( $m2P -eq 4 ) -or ( $m2P -eq 5 ) ) -and ( $m3P -eq 2 ) ) -or
+       ( ( $m2P -eq 1 ) -and ( $m3P -eq 1 ) ) ) {
+    modSel
+  }
+  clearText
+  # Troll armour menus and actions
+  if ( $m2P -eq 0 ) {
+    $m4T = ""
+    if ( $m3P -eq 0 ) {
+      $lineNo = "13"
+      $linePfx = 'Stars'
+      $m4Q = "Select colour for troll armour:"
+      $m4O = '&Blue','&Green','&Purple','Blac&k','&White'
+    }
+    if ( $m3P -eq 1 ) {
+      $lineNo = "8"
+      $linePfx = 'Mud'
+      $m4Q = "Select armour cleanliness:"
+      $m4O = '&Clean','&Dirty'
+    }
+    $m4P = $Host.UI.PromptForChoice($m4T, $m4Q, $m4O, 0)
+
+    if ( $m3P -eq 0 ) {
+      if ( $m4P -eq 0 ) {
+        $lineSfx = "0"
+      }
+      if ( $m4P -eq 1 ) {
+        $lineSfx = "1"
+      }
+      if ( $m4P -eq 2 ) {
+        $lineSfx = "2"
+      }
+      if ( $m4P -eq 3 ) {
+        $lineSfx = "3"
+      }
+      if ( $m4P -eq 4 ) {
+        $lineSfx = "4"
+      }
+    }
+
+    if ( $m3P -eq 1 ) {
+      if ( $m4P -eq 0 ) {
+        $lineSfx = "false"
+      }
+      if ( $m4P -eq 1 ) {
+        $lineSfx = "true"
+      }
+    }
+  }
+  # Loki's First Person Camera
+  if ( $m2P -eq 1 ) {
+    if ( $m3P -eq 0 ) {
+      $lineNo = "80"
+      $linePfx = "Hotkey"
+      $dftSfx = "H"
+      $lineSfx = Read-Host -Prompt "$keyQ camera reset"
+    }
+  }
+  # Movable Inventory Windows
+  if ( $m2P -eq 2 ) {
+    if ( $m3P -eq 0 ) {
+      $lineNo = "53"
+      $linePfx = "ModKeyOne"
+      $dftSfx = "mouse 0"
+      $lineSfx = Read-Host -Prompt "$keyQ first modifier key"
+    }
+    if ( $m3P -eq 1 ) {
+      $lineNo = "58"
+      $linePfx = "ModKeyTwo"
+      $dftSfx = "left ctrl"
+      $lineSfx = Read-Host -Prompt "$keyQ second modifier key"
+    }
+  }
+  # Equip wheels
+  if ( $m2P -eq 3 ) {
+    $m4T = ""
+    if ( $m3P -eq 0 ) {
+      $modCf = "virtuacode.valheim.equipwheel"
+      $itemNo = "1"
+    }
+    if ( $m3P -eq 1 ) {
+      $modCf = "virtuacode.valheim.equipwheeltwo"
+      $itemNo = "2"
+    }
+    if ( $m3P -eq 2 ) {
+      $modCf = "virtuacode.valheim.equipwheelthree"
+      $itemNo = "3"
+    }
+    if ( $m3P -eq 3 ) {
+      $modCf = "virtuacode.valheim.equipwheelfour"
+      $itemNo = "4"
+    }
+    submenuMsg
+    $m4Q = "Select property to modify:"
+    $m4O = '&Epic Loot rarity colouring','Item &highlight colour','&Keyboard binding','E&xit'
+    $m4P = $Host.UI.PromptForChoice($m4T, $m4Q, $m4O, 3)
+
+    if ( $m4P -eq 0 ) {
+      submenuMsg
+      $lineNo = "23"
+      $linePfx = "UseRarityColoring"
+      $m5T = ""
+      $m5Q = "Use Epic Loot colours when highlighting an enchanted item?"
+      $m5O = '&True','&False'
+      $m5P = $Host.UI.PromptForChoice($m5T, $m5Q, $m5O, 0)
+
+      if ( $mp5 -eq 0 ) {
+        $lineSfx = "true"
+      }
+      if ( $mp5 -eq 0 ) {
+        $lineSfx = "false"
+      }
+    }
+    if ( $m4P -eq 1 ) {
+      submenuMsg
+      $lineNo = "8"
+      $linePfx = "HighlightColor"
+      $dftSfx = "6ABBFFFF"
+      $lineSfx = Read-Host -Prompt "Colour (Hex w/ Alpha, RRGGBBAA) for highlight"
+    }
+    if ( $m4P -eq 2 ) {
+      submenuMsg
+      $lineNo = "37"
+      $linePfx = "Hotkey"
+      if ( $itemNo -eq 1 ) {
+        $dftSfx = "U"
+      }
+      if ( $itemNo -eq 2 ) {
+        $dftSfx = "I"
+      }
+      if ( $itemNo -eq 3 ) {
+        $dftSfx = "O"
+      }
+      if ( $itemNo -eq 4 ) {
+        $dftSfx = "P"
+      }
+      $lineSfx = Read-Host -Prompt "$keyQ $modNme $itemNo"
+    }
+    if ( $m4P -eq 3 ) {
+      modSel
+    }
+  }
+  # Emote wheel
+  if ( $m2P -eq 4 ) {
+    if ( $m3P -eq 0 ) {
+      $lineNo = "8"
+      $linePfx = "HighlightColor"
+      $dftSfx = "FFD100FF"
+      $lineSfx = Read-Host -Prompt "Colour (Hex w/ Alpha, RRGGBBAA) for highlight"
+    }
+    if ( $m3P -eq 1 ) {
+      $lineNo = "22"
+      $linePfx = "Hotkey"
+      $dftSfx = "Slash"
+      $lineSfx = Read-Host -Prompt "$keyQ $modName"
+    }
+  }
+  # Equipment & Quick Slots
+  if ( $m2P -eq 5 ) {
+    $m4T = ""
+    if ( $m3P -eq 0 ) {
+      $EQSa = "0"
+      $linePfx = "Quick slot hotkey $itemNo"
+    }
+    if ( $m3P -eq 1 ) {
+      $EQSa = "15"
+      $linePfx = "Quick slot hotkey label $itemNo"
+    }
+    submenuMsg
+    $m4Q = "Select hotkey to modify:"
+    $m4O = 'Hotkey &1','Hotkey &2','Hotkey &3','E&xit'
+    $m4P = $Host.UI.PromptForChoice($m4T, $m4Q, $m4O, 3)
+
+    if ( $m4P -eq 0 ) {
+      $itemNo = "1"
+      $lineNo = 8+$EQSa
+      if ( $m3P -eq 0 ) {
+        $dftSfx = "x"
+      }
+    }
+    if ( $m4P -eq 1 ) {
+      $itemNo = "2"
+      $lineNo = 13 + $EQSa
+      if ( $m3P -eq 0 ) {
+        $dftSfx = "c"
+      }
+    }
+    if ( $m4P -eq 2 ) {
+      $itemNo = "3"
+      $lineNo = 18 + $EQSa
+      if ( $m3P -eq 0 ) {
+        $dftSfx = "v"
+      }
+    }
+    if ( $m4P -eq 3 ) {
+      modSel
+    }
+    echo "DEBUG:"
+    echo "------"
+    echo "$EQSa"
+    echo "$lineNo"
+    echo "$itemNo"
+    echo "$linePfx"
+    pause
+    if ( $m3P -eq 0 ) {
+      $lineSfx = Read-Host -Prompt "$keyQ hotkey $itemNo"
+    }
+    if ( $m3P -eq 1 ) {
+      $dftSfx = ""
+      $lineSfx = Read-Host -Prompt "Alias to use for hotkey $itemNo"
+    }
+  }
+
+  $targetFile = "$modPath\BepInEx\$cMgrSrc\$modCf.cfg"
+  $targetAct = Get-Content -Path $targetFile
+  if ( $lineSfx ) {
+    $targetAct[$lineNo] = "$linePfx = $lineSfx"
+  }
+  else {
+    $targetAct[$lineNo] = "$linePfx = $dftSfx"
+  }
+  $targetAct | Set-Content -Path $targetFile
   chgFin
 }
 
+function submenuMsg {
+  clearText
+  if ( $m2P -eq 3 ) {
+    Write-Host "$defCfgMsg $modName $itemNo" -ForegroundColor "Yellow" -BackgroundColor "Black"
+  }
+  if ( $m2P -eq 5 ) {
+    Write-Host "$defCfgMsg $modName" -ForegroundColor "Yellow" -BackgroundColor "Black"
+  }
+  echo ""
+}
+
 function chgFin {
-  echo "$modName has been ${mgrWord}d."
+  Write-Host "$modName has been ${mgrWord}d." -ForegroundColor "$modeStatus"
   if ( $postOpMsg -ne 0 ) {
-    echo "$postOpMsg"
+    Write-Host "$postOpMsg" -ForegroundColor "$modeStatus"
   }
   pakPrompt
   modSel
@@ -91,81 +423,138 @@ function chgFin {
 function modSel {
   clearText
 	$m2T = ""
-	$m2Q = "Select modification to ${mgrWord}:"
-	$m2O = 'ValheimFPS&Boost','&1st-Person camera','E&mote wheel','E&quip wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','&Troll armor rework','Movable inventory &windows','E&xit'
-	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
-
+  $m2Q = "Select modification to ${mgrWord}:"
+  if ( $modMode -ne 2 ) {
+  	$m2O = '&Troll armor rework','&1st-Person camera','Movable inventory &windows','E&quip wheel','E&mote wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','ValheimFPS&Boost','E&xit'
+  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
+  }
+  if ( $modMode -eq 2 ) {
+  	$m2O = '&Troll armor rework','&1st-Person camera','Movable inventory &windows','E&quip wheel','E&mote wheel','&Equipment & Quick Slots','E&xit'
+  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 5)
+  }
   if ( $m2P -eq 0 ) {
-    $modPf = "0"
-    $modPd = "ValheimFPSBoost"
-    $modCf = "0"
-    $modChk = "$modPd"
-    $modName = "$modPd"
+    if ( $modMode -lt 2 ) {
+      $modPf = "TrollArmorRework"
+      $modPd = "0"
+      $modChk = "$modPf.dll"
+    }
+    if ( $modMode -eq 2 ) {
+      $modMsg = "0"
+      $modPf = "0"
+      $modPd = "0"
+      $modChk = "0"
+    }
+    $modName = "Troll armor rework"
+    $modCf = "StrykeDev.TrollArmorRework"
   }
   if ( $m2P -eq 1 ) {
-    $modPf = "FirstPersonValheimClientMod"
-    $modPd = "0"
-    $modCf = "com.loki.clientmods.valheim.firstperson"
-    $modChk = "$modPf."
+    if ( $modMode -lt 2 ) {
+      $modPf = "FirstPersonValheimClientMod"
+      $modPd = "0"
+      $modChk = "$modPf.dll"
+    }
+    if ( $modMode -eq 2 ) {
+      $modMsg = "0"
+      $modPf = "0"
+      $modPd = "0"
+      $modChk = "0"
+    }
     $modName = "Loki's First Person Valheim"
+    $modCf = "com.loki.clientmods.valheim.firstperson"
   }
   if ( $m2P -eq 2 ) {
-    $modPf = "EmoteWheel"
-    $modPd = "0"
-    $modCf = "virtuacode.valheim.emotewheel"
-    $modChk = "$modPf.dll"
-    $modName = "Emote Wheel"
+    if ( $modMode -lt 2 ) {
+      $modPf = "MovableInventoryWindows"
+      $modPd = "0"
+      $modChk = "$modPf.dll"
+    }
+    if ( $modMode -eq 2 ) {
+      $modMsg = "1"
+      $modPf = "0"
+      $modPd = "0"
+      $modChk = "0"
+    }
+    $modName = "Movable inventory windows"
+    $modCf = "aedenthorn.MovableInventoryWindows"
   }
   if ( $m2P -eq 3 ) {
-    $modPf = "EquipWheel"
-    $modPd = "0"
-    $modCf = "virtuacode.valheim.equipwheel"
-    $modChk = "$modPf.dll"
+    if ( $modMode -lt 2 ) {
+      $modPf = "EquipWheel"
+      $modPd = "0"
+      $modChk = "$modPf.dll"
+    }
+    if ( $modMode -eq 2 ) {
+      $modMsg = "0"
+      $modPf = "0"
+      $modPd = "0"
+      $modChk = "0"
+    }
     $modName = "Equip Wheels"
+    $modCf = "virtuacode.valheim.equipwheel"
   }
   if ( $m2P -eq 4 ) {
-    $modPf = "ClockMod"
-    $modPd = "0"
-    $modCf = "aedenthorn.ClockMod"
-    $modChk = "$modPf.dll"
-    $modName = "Clock"
-  }
+    if ( $modMode -lt 2 ) {
+      $modPf = "EmoteWheel"
+      $modPd = "0"
+      $modChk = "$modPf.dll"
+    }
+    if ( $modMode -eq 2 ) {
+      $modMsg = "0"
+      $modPf = "0"
+      $modPd = "0"
+      $modChk = "0"
+    }
+    $modName = "Emote Wheel"
+    $modCf = "virtuacode.valheim.emotewheel"
+    }
   if ( $m2P -eq 5 ) {
+    if ( $modMode -lt 2 ) {
+      $modPf = "ClockMod"
+      $modPd = "0"
+      $modCf = "aedenthorn.ClockMod"
+      $modChk = "$modPf.dll"
+      $modName = "Clock"
+    }
+    if ( $modMode -eq 2) {
+      $modMsg = "0"
+      $modPf = "EquipmentAndQuickSlots"
+      $modPd = "0"
+      $modCf = "randyknapp.mods.equipmentandquickslots"
+      $modChk = "$modPf.dll"
+      $modName = "Equipment & Quick Slots"
+    }
+  }
+
+  if ( $m2P -eq 6 ) {
     $modPf = "Compass"
     $modPd = "Compass"
     $modCf = "aedenthorn.Compass"
     $modChk = "$modPf.dll"
     $modName = "$modPd"
   }
-  if ( $m2P -eq 6 ) {
+  if ( $m2P -eq 7 ) {
     $modPf = "FermenterStatus"
     $modPd = "0"
     $modCf = "0"
     $modChk = "$modPf.dll"
     $modName = "Fermenter Status"
   }
-  if ( $m2P -eq 7 ) {
+  if ( $m2P -eq 8 ) {
     $modPf = "0"
     $modPd = "Jowleth"
     $modCf = "uk.co.jowleth.valheim.orestatus.cfg"
     $modChk = "$modPd"
     $modName = "Ore Status"
   }
-  if ( $m2P -eq 8 ) {
-    $modPf = "TrollArmorRework"
-    $modPd = "0"
-    $modCf = "StrykeDev.TrollArmorRework"
-    $modChk = "$modPf.dll"
-    $modName = "Troll armor rework"
-  }
   if ( $m2P -eq 9 ) {
-    $modPf = "MovableInventoryWindows"
-    $modPd = "0"
-    $modCf = "aedenthorn.MovableInventoryWindows"
-    $modChk = "$modPf.dll"
-    $modName = "Movable inventory windows"
+    $modPf = "0"
+    $modPd = "ValheimFPSBoost"
+    $modCf = "0"
+    $modChk = "$modPd"
+    $modName = "$modPd"
   }
-  if ( $m2P -eq 10 ) {
+  if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 10 ) ) -or
+       ( ( $modMode -eq 2 ) -and ( $m2P -eq 7 ) ) ) {
 		modMgmt
 	}
   chgState
@@ -183,11 +572,12 @@ function modMgmt {
   echo ""
 	$m1T = ""
 	$m1Q = "Select management mode:"
-	$m1O = '&Enable','&Disable','&Main menu'
-	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 2)
+	$m1O = '&Enable','&Disable','&Configure','&Main menu'
+	$m1P = $Host.UI.PromptForChoice($m1T, $m1Q, $m1O, 3)
 
-	if ( $m1P -eq 0 ) {
+  if ( $m1P -eq 0 ) {
 		Set-Variable -Name "modMode" -Value "0" -Scope Script
+    $modeStatus = "green"
     $mgrWord = "enable"
     $postOpMsg = "0"
     $pMgrSrc = "disabledPlugins"
@@ -196,17 +586,29 @@ function modMgmt {
     $cMgrDst = "config"
     modSel
 	}
-	if ( $m1P -eq 1 ) {
-		Set-Variable -Name "modMode" -Value "1" -Scope Script
-    $mgrWord = "disable"
-    $postOpMsg = "Re-enable it by changing management mode."
-    $pMgrSrc = "plugins"
-    $pMgrDst = "disabledPlugins"
+  if ( ( $m1P -eq 1 ) -or
+       ( $m1P -eq 2 ) ) {
+    if ( $m1P -eq 1 ) {
+  		Set-Variable -Name "modMode" -Value "1" -Scope Script
+      $modeStatus = "yellow"
+      $mgrWord = "disable"
+      $postOpMsg = "Re-enable it by changing management mode."
+      $pMgrSrc = "plugins"
+      $pMgrDst = "disabledPlugins"
+    }
+    if ( $m1P -eq 2 ) {
+  		Set-Variable -Name "modMode" -Value "2" -Scope Script
+      $modeStatus = "green"
+      $mgrWord = "configure"
+      $postOpMsg = "Continue to make adjustments as desired."
+      $pMgrSrc = "0"
+      $pMgrDst = "0"
+    }
     $cMgrSrc = "config"
     $cMgrDst = "disabledConfig"
     modSel
 	}
-	if ( $m1P -eq 2 ) {
+	if ( $m1P -eq 3 ) {
 		consent
 	}
 }
@@ -233,12 +635,13 @@ function mkLnOnce {
   New-Item -Target "$cBPXsrc\aedenthorn.Compass.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.Compass.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\aedenthorn.MovableInventoryWindows.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.MovableInventoryWindows.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\com.loki.clientmods.valheim.firstperson.cfg" -ItemType SymbolicLink -Path "$cBPXdst\com.loki.clientmods.valheim.firstperson.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\StrykeDev.TrollArmorRework.cfg" -ItemType SymbolicLink -Path "$cBPXdst\StrykeDev.TrollArmorRework.cfg" -ErrorAction SilentlyContinue | Out-Null
+  New-Item -Target "$cBPXsrc\uk.co.jowleth.valheim.orestatus.cfg" -ItemType SymbolicLink -Path "$cBPXdst\uk.co.jowleth.valheim.orestatus.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\virtuacode.valheim.emotewheel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.emotewheel.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheel.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheelfour.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheelfour.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheelthree.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheelthree.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$cBPXsrc\virtuacode.valheim.equipwheeltwo.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.equipwheeltwo.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-Item -Target "$cBPXsrc\StrykeDev.TrollArmorRework.cfg" -ItemType SymbolicLink -Path "$cBPXdst\StrykeDev.TrollArmorRework.cfg" -ErrorAction SilentlyContinue | Out-Null
 }
 
 function mkLn {
