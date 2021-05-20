@@ -165,7 +165,7 @@ function cfgChangeMenu {
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 4)
   }
   if ( $m2P -eq 4 ) {
-    $m3O = 'Item &highlight colour','&Keyboard binding','E&xit'
+    $m3O = 'Item &highlight colour','&Key binding','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
   }
   if ( $m2P -eq 5 ) {
@@ -173,18 +173,22 @@ function cfgChangeMenu {
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 3)
   }
   if ( $m2P -eq 6 ) {
-    $m3O = 'Key binding','E&xit'
+    $m3O = '&Key binding','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   if ( $m2P -eq 7 ) {
-    $m3O = 'Key binding','E&xit'
+    $m3O = '&Key binding','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
+  }
+  if ( $m2P -eq 8 ) {
+    $m3O = '&Key binding','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   # All of the conditions for exiting the menu.
   if ( ( ( $mP2 -eq 3 ) -and ( $m3P -eq 4 ) ) -or
      ( ( ( $m2P -eq 1 ) -or ( $m2P -eq 5 ) ) -and ( $m3P -eq 3 ) ) -or
      ( ( ( $m2P -eq 0 ) -or ( $m2P -eq 2 ) -or ( $m2P -eq 4 ) ) -and ( $m3P -eq 2 ) ) -or
-     ( ( ( $m2P -eq 6 ) -or ( $m2P -eq 7 ) ) -and ( $m3P -eq 1 ) ) ) {
+     ( ( ( $m2P -eq 6 ) -or ( $m2P -eq 7 ) -or ( $m2P -eq 8 ) ) -and ( $m3P -eq 1 ) ) ) {
     modSel
   }
   clearText
@@ -422,6 +426,14 @@ function cfgChangeMenu {
     $chgCfg = "$keyQ using previously-selected weapon"
   }
 
+  # Improved Swimming
+  if ( $m2P -eq 8 ) {
+    $lineNo = "9"
+    $linePfx = "swimFasterKey"
+    $dftSfx = "LeftShift"
+    $chgCfg = "$keyQ faster swimming (ideally, use `"run`" key)"
+  }
+
   if ( $cls -eq 0 ) {
     echo "DEBUG:"
     echo "------"
@@ -474,19 +486,17 @@ function modSel {
   	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
   }
   if ( $modMode -eq 2 ) {
-  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','E&xit'
-  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 8)
+    $modPf = "0"
+    $modPf = "0"
+    $modChk = "0"
+  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','&Improved Swimming','E&xit'
+  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 9)
   }
   if ( $m2P -eq 0 ) {
     if ( $modMode -lt 2 ) {
       $modPf = "TrollArmorRework"
       $modPd = "0"
       $modChk = "$modPf.dll"
-    }
-    if ( $modMode -eq 2 ) {
-      $modPf = "0"
-      $modPd = "0"
-      $modChk = "0"
     }
     $modName = "Troll armor rework"
     $modCf = "StrykeDev.TrollArmorRework"
@@ -496,11 +506,6 @@ function modSel {
       $modPf = "FirstPersonValheimClientMod"
       $modPd = "0"
       $modChk = "$modPf.dll"
-    }
-    if ( $modMode -eq 2 ) {
-      $modPf = "0"
-      $modPd = "0"
-      $modChk = "0"
     }
     $modName = "Loki's First Person Valheim"
     $modCf = "com.loki.clientmods.valheim.firstperson"
@@ -513,9 +518,6 @@ function modSel {
     }
     if ( $modMode -eq 2 ) {
       $modMsg = "1"
-      $modPf = "0"
-      $modPd = "0"
-      $modChk = "0"
     }
     $modName = "Movable inventory windows"
     $modCf = "aedenthorn.MovableInventoryWindows"
@@ -526,11 +528,6 @@ function modSel {
       $modPd = "0"
       $modChk = "$modPf.dll"
     }
-    if ( $modMode -eq 2 ) {
-      $modPf = "0"
-      $modPd = "0"
-      $modChk = "0"
-    }
     $modName = "Equip Wheels"
     $modCf = "virtuacode.valheim.equipwheel"
   }
@@ -539,11 +536,6 @@ function modSel {
       $modPf = "EmoteWheel"
       $modPd = "0"
       $modChk = "$modPf.dll"
-    }
-    if ( $modMode -eq 2 ) {
-      $modPf = "0"
-      $modPd = "0"
-      $modChk = "0"
     }
     $modName = "Emote Wheel"
     $modCf = "virtuacode.valheim.emotewheel"
@@ -556,9 +548,7 @@ function modSel {
       $modName = "Clock"
     }
     if ( $modMode -eq 2) {
-      $modPf = "0"
       $modCf = "randyknapp.mods.equipmentandquickslots"
-      $modChk = "0"
       $modName = "Equipment & Quick Slotsy"
     }
     $modPd = "0"
@@ -572,10 +562,7 @@ function modSel {
       $modName = "$modPd"
     }
     if ($modMode -eq 2 ) {
-      $modPf = "0"
-      $modPd = "0"
       $modCf = "org.bepinex.plugins.valheim.quick_stack"
-      $modChk = "0"
       $modName = "Quick Stack"
     }
   }
@@ -587,20 +574,23 @@ function modSel {
       $modChk = "$modPf.dll"
       $modName = "Fermenter Status"
     }
-    if ( $ modMode -eq 2 ) {
-      $modPf = "0"
-      $modPd = "0"
+    if ( $modMode -eq 2 ) {
       $modCf = "bakaSpaceman.LastUsedWeapons"
-      $modChk = "0"
       $modName = "Last Used Weapon"
     }
   }
   if ( $m2P -eq 8 ) {
+    if ( $modMode -lt 2 ) {
+      $modPd = "Jowleth"
+      $modCf = "uk.co.jowleth.valheim.orestatus"
+      $modChk = "$modPd"
+      $modName = "Ore Status"
+    }
+    if ( $modMode -eq 2 ) {
+      $modCf = "projjm.improvedswimming"
+      $modName = "Improved Swimming"
+    }
     $modPf = "0"
-    $modPd = "Jowleth"
-    $modCf = "uk.co.jowleth.valheim.orestatus.cfg"
-    $modChk = "$modPd"
-    $modName = "Ore Status"
   }
   if ( $m2P -eq 9 ) {
     $modPf = "0"
@@ -610,7 +600,7 @@ function modSel {
     $modName = "$modPd"
   }
   if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 10 ) ) -or
-       ( ( $modMode -eq 2 ) -and ( $m2P -eq 8 ) ) ) {
+       ( ( $modMode -eq 2 ) -and ( $m2P -eq 9 ) ) ) {
 		modMgmt
 	}
   chgState
