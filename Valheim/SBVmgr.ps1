@@ -128,7 +128,7 @@ function chgState {
 
 function cfgChangeMenu {
   $keyQ = "Key to use for"
-  $defCfgMsg = "Now defining configuration for"
+  $valQ = "Value to use for"
   clearText
   if ( $modMsg -ne 0 ) {
     if ( $m2P -eq 2 ) {
@@ -153,8 +153,8 @@ function cfgChangeMenu {
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
   }
   if ( $m2P -eq 1 ) {
-    $m3O = '&Camera reset key','E&xit'
-    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
+    $m3O = '&1st-person FOV','&3rd-person FOV','&Camera mode key','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 3)
   }
   if ( $m2P -eq 2 ) {
     $m3O = '&1st modifier key','&2nd modifier key','E&xit'
@@ -169,17 +169,26 @@ function cfgChangeMenu {
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
   }
   if ( $m2P -eq 5 ) {
-    $m3O = 'Key &binding','Key &alias','E&xit'
-    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 2)
+    $m3O = 'Hotkey &1','Hotkey &2','Hotkey &3','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 3)
+  }
+  if ( $m2P -eq 6 ) {
+    $m3O = 'Key binding','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
+  }
+  if ( $m2P -eq 7 ) {
+    $m3O = 'Key binding','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   # All of the conditions for exiting the menu.
-  if ( ( ( $m2P -eq 3 ) -and ( $m3P -eq 4 ) ) -or
-     ( ( ( $m2P -eq 0 ) -or ( $m2P -eq 2 ) -or ( $m2P -eq 4 ) -or ( $m2P -eq 5 ) ) -and ( $m3P -eq 2 ) ) -or
-       ( ( $m2P -eq 1 ) -and ( $m3P -eq 1 ) ) ) {
+  if ( ( ( $mP2 -eq 3 ) -and ( $m3P -eq 4 ) ) -or
+     ( ( ( $m2P -eq 1 ) -or ( $m2P -eq 5 ) ) -and ( $m3P -eq 3 ) ) -or
+     ( ( ( $m2P -eq 0 ) -or ( $m2P -eq 2 ) -or ( $m2P -eq 4 ) ) -and ( $m3P -eq 2 ) ) -or
+     ( ( ( $m2P -eq 6 ) -or ( $m2P -eq 7 ) ) -and ( $m3P -eq 1 ) ) ) {
     modSel
   }
   clearText
-  # Troll armour menus and actions
+  # Troll Armour Rework
   if ( $m2P -eq 0 ) {
     $m4T = ""
     if ( $m3P -eq 0 ) {
@@ -197,8 +206,9 @@ function cfgChangeMenu {
     $m4P = $Host.UI.PromptForChoice($m4T, $m4Q, $m4O, 0)
 
     if ( $m3P -eq 0 ) {
+      $dftSfx = "0"
       if ( $m4P -eq 0 ) {
-        $lineSfx = "0"
+        $lineSfx = "$dftSfx"
       }
       if ( $m4P -eq 1 ) {
         $lineSfx = "1"
@@ -215,39 +225,57 @@ function cfgChangeMenu {
     }
 
     if ( $m3P -eq 1 ) {
+      $dftSfx = "false"
       if ( $m4P -eq 0 ) {
-        $lineSfx = "false"
+        $lineSfx = "$dftSfx"
       }
       if ( $m4P -eq 1 ) {
         $lineSfx = "true"
       }
     }
   }
+
   # Loki's First Person Camera
   if ( $m2P -eq 1 ) {
     if ( $m3P -eq 0 ) {
-      $lineNo = "80"
+      $cfgChg = "$valQ first-person field of view"
+      $lineNo = "61"
+      $linePfx = "FovFirstPerson"
+      $dftSfx = "90"
+    }
+    if ( $m3P -eq 1 ) {
+      $cfgChg = "$valQ third-person field of view"
+      $lineNo = "56"
+      $linePfx = "FovThirdPerson"
+      $dftSfx = "90"
+    }
+    if ( $m3P -eq 2 ) {
+      $cfgChg = "$keyQ camera reset"
+      $lineNo = "75"
       $linePfx = "Hotkey"
       $dftSfx = "H"
-      $lineSfx = Read-Host -Prompt "$keyQ camera reset"
     }
+    $lineSfx = Read-Host -Prompt "$cfgChg"
   }
+
   # Movable Inventory Windows
   if ( $m2P -eq 2 ) {
     if ( $m3P -eq 0 ) {
+      $cfgChg = "$keyQ first modifier key"
       $lineNo = "53"
       $linePfx = "ModKeyOne"
       $dftSfx = "mouse 0"
-      $lineSfx = Read-Host -Prompt "$keyQ first modifier key"
     }
     if ( $m3P -eq 1 ) {
+      $cfgChg = "$keyQ second modifier key"
       $lineNo = "58"
       $linePfx = "ModKeyTwo"
       $dftSfx = "left ctrl"
-      $lineSfx = Read-Host -Prompt "$keyQ second modifier key"
     }
+    $lineSfx = Read-Host -Prompt "$chgCfg"
   }
-  # Equip wheels
+
+  # Equip Wheels
   if ( $m2P -eq 3 ) {
     $m4T = ""
     if ( $m3P -eq 0 ) {
@@ -266,6 +294,7 @@ function cfgChangeMenu {
       $modCf = "virtuacode.valheim.equipwheelfour"
       $itemNo = "4"
     }
+
     submenuMsg
     $m4Q = "Select property to modify:"
     $m4O = '&Epic Loot rarity colouring','Item &highlight colour','&Keyboard binding','E&xit'
@@ -280,113 +309,127 @@ function cfgChangeMenu {
       $m5O = '&True','&False'
       $m5P = $Host.UI.PromptForChoice($m5T, $m5Q, $m5O, 0)
 
-      if ( $mp5 -eq 0 ) {
+      if ( $m5P -eq 0 ) {
         $lineSfx = "true"
       }
-      if ( $mp5 -eq 0 ) {
+      if ( $m5P -eq 1 ) {
         $lineSfx = "false"
       }
     }
-    if ( $m4P -eq 1 ) {
+    if ( $m4P -gt 0 ) {
       submenuMsg
-      $lineNo = "8"
-      $linePfx = "HighlightColor"
-      $dftSfx = "6ABBFFFF"
-      $lineSfx = Read-Host -Prompt "Colour (Hex w/ Alpha, RRGGBBAA) for highlight"
-    }
-    if ( $m4P -eq 2 ) {
-      submenuMsg
-      $lineNo = "37"
-      $linePfx = "Hotkey"
-      if ( $itemNo -eq 1 ) {
-        $dftSfx = "U"
+      if ( $m4P -eq 1 ) {
+        $cfgChg = "Colour (Hex w/ Alpha, RRGGBBAA) for highlight"
+        $lineNo = "8"
+        $linePfx = "HighlightColor"
+        $dftSfx = "6ABBFFFF"
       }
-      if ( $itemNo -eq 2 ) {
-        $dftSfx = "I"
+      if ( $m4P -eq 2 ) {
+        $cfgChg = "$keyQ $modName $itemNo"
+        $lineNo = "37"
+        $linePfx = "Hotkey"
+        if ( $itemNo -eq 1 ) {
+          $dftSfx = "U"
+        }
+        if ( $itemNo -eq 2 ) {
+          $dftSfx = "I"
+        }
+        if ( $itemNo -eq 3 ) {
+          $dftSfx = "O"
+        }
+        if ( $itemNo -eq 4 ) {
+          $dftSfx = "P"
+        }
       }
-      if ( $itemNo -eq 3 ) {
-        $dftSfx = "O"
+      if ( $m4P -eq 3 ) {
+        modSel
       }
-      if ( $itemNo -eq 4 ) {
-        $dftSfx = "P"
-      }
-      $lineSfx = Read-Host -Prompt "$keyQ $modNme $itemNo"
-    }
-    if ( $m4P -eq 3 ) {
-      modSel
+      $lineSfx = Read-Host -Prompt "$cfgChg"
     }
   }
-  # Emote wheel
+
+  # Emote Wheel
   if ( $m2P -eq 4 ) {
     if ( $m3P -eq 0 ) {
+      $chgCfg = "Colour (Hex w/ Alpha, RRGGBBAA) for highlight"
       $lineNo = "8"
       $linePfx = "HighlightColor"
       $dftSfx = "FFD100FF"
-      $lineSfx = Read-Host -Prompt "Colour (Hex w/ Alpha, RRGGBBAA) for highlight"
     }
     if ( $m3P -eq 1 ) {
+      $chgCfg = "$keyQ $modName"
       $lineNo = "22"
       $linePfx = "Hotkey"
       $dftSfx = "Slash"
-      $lineSfx = Read-Host -Prompt "$keyQ $modName"
     }
+    $lineSfx = Read-Host -Prompt "$chgCfg"
   }
-  # Equipment & Quick Slots
+
+  # Equipment and Quick Slots
   if ( $m2P -eq 5 ) {
     $m4T = ""
-    if ( $m3P -eq 0 ) {
-      $EQSa = "0"
-      $linePfx = "Quick slot hotkey $itemNo"
+    if ( $m3p -eq 0 ) {
+      $itemNo = "1"
+      $MQSline = "8"
+      $dftSfx = "x"
     }
-    if ( $m3P -eq 1 ) {
-      $EQSa = "15"
-      $linePfx = "Quick slot hotkey label $itemNo"
+    if ( $m3p -eq 1 ) {
+      $itemNo = "2"
+      $MQSline = "13"
+      $dftSfx = "c"
+    }
+    if ( $m3p -eq 2 ) {
+      $itemNo = "3"
+      $MQSline = "18"
+      $dftSfx = "v"
     }
     submenuMsg
-    $m4Q = "Select hotkey to modify:"
-    $m4O = 'Hotkey &1','Hotkey &2','Hotkey &3','E&xit'
-    $m4P = $Host.UI.PromptForChoice($m4T, $m4Q, $m4O, 3)
+    $m4Q = "Select hotkey property:"
+    $m4O = '&Binding','&Alias','E&xit'
+    $m4P = $Host.UI.PromptForChoice($m4T, $m4Q, $m4O, 2)
 
     if ( $m4P -eq 0 ) {
-      $itemNo = "1"
-      $lineNo = 8+$EQSa
-      if ( $m3P -eq 0 ) {
-        $dftSfx = "x"
-      }
+      $MQSa = "0"
+      $linePfx = "Quick slot hotkey $itemNo"
+      $chgCfg = "$keyQ hotkey $itemNo"
     }
     if ( $m4P -eq 1 ) {
-      $itemNo = "2"
-      $lineNo = 13 + $EQSa
-      if ( $m3P -eq 0 ) {
-        $dftSfx = "c"
-      }
+      $MQSa = "15"
+      $linePfx = "Quick slot hotkey label $itemNo"
+      $dftSfx = ""
+      $chgCfg = "Name to use for hotkey $itemNo"
     }
     if ( $m4P -eq 2 ) {
-      $itemNo = "3"
-      $lineNo = 18 + $EQSa
-      if ( $m3P -eq 0 ) {
-        $dftSfx = "v"
-      }
-    }
-    if ( $m4P -eq 3 ) {
       modSel
     }
-    echo "DEBUG:"
-    echo "------"
-    echo "$EQSa"
-    echo "$lineNo"
-    echo "$itemNo"
-    echo "$linePfx"
-    pause
-    if ( $m3P -eq 0 ) {
-      $lineSfx = Read-Host -Prompt "$keyQ hotkey $itemNo"
-    }
-    if ( $m3P -eq 1 ) {
-      $dftSfx = ""
-      $lineSfx = Read-Host -Prompt "Alias to use for hotkey $itemNo"
-    }
+    $lineNo = [int]$MQSline+[int]$MQSa
+    $lineSfx = Read-Host -Prompt "$chgCfg"
   }
 
+  # Quick Stack
+  if ( $m2P -eq 6 ) {
+    $lineNo = "8"
+    $linePfx = "QuickStackKey"
+    $dftSfx = "BackQuote"
+    $chgCfg = "$keyQ depositing inventory in nearby containers"
+  }
+
+  # Last Used Weapon
+  if ( $m2P -eq 7 ) {
+    $lineNo = "20"
+    $linePfx = "ToggleLastUsedWeapons"
+    $dftSfx = "R"
+    $chgCfg = "$keyQ using previously-selected weapon"
+  }
+
+  if ( $cls -eq 0 ) {
+    echo "DEBUG:"
+    echo "------"
+    echo "LINE: $lineNo"
+    echo "OPTION: $linePfx"
+    echo "REPLACE: $lineSfx"
+    pause
+  }
   $targetFile = "$modPath\BepInEx\$cMgrSrc\$modCf.cfg"
   $targetAct = Get-Content -Path $targetFile
   if ( $lineSfx ) {
@@ -402,11 +445,12 @@ function cfgChangeMenu {
 function submenuMsg {
   clearText
   if ( $m2P -eq 3 ) {
-    Write-Host "$defCfgMsg $modName $itemNo" -ForegroundColor "Yellow" -BackgroundColor "Black"
+    $submenuInfo = "Now configuring settings for Equip Wheel $itemNo"
   }
   if ( $m2P -eq 5 ) {
-    Write-Host "$defCfgMsg $modName" -ForegroundColor "Yellow" -BackgroundColor "Black"
+    $submenuInfo = "Now configuring properties for hotkey $itemNo"
   }
+  Write-Host "$submenuInfo" -ForegroundColor "Yellow" -BackgroundColor "Black"
   echo ""
 }
 
@@ -422,15 +466,16 @@ function chgFin {
 # User-interactive mod selection menu
 function modSel {
   clearText
+  $modMsg = "0"
 	$m2T = ""
   $m2Q = "Select modification to ${mgrWord}:"
   if ( $modMode -ne 2 ) {
-  	$m2O = '&Troll armor rework','&1st-Person camera','Movable inventory &windows','E&quip wheel','E&mote wheel','Cloc&k','Com&pass','&Fermenter status','&Ore status','ValheimFPS&Boost','E&xit'
+  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','E&xit'
   	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
   }
   if ( $modMode -eq 2 ) {
-  	$m2O = '&Troll armor rework','&1st-Person camera','Movable inventory &windows','E&quip wheel','E&mote wheel','&Equipment & Quick Slots','E&xit'
-  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 5)
+  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','E&xit'
+  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 8)
   }
   if ( $m2P -eq 0 ) {
     if ( $modMode -lt 2 ) {
@@ -439,7 +484,6 @@ function modSel {
       $modChk = "$modPf.dll"
     }
     if ( $modMode -eq 2 ) {
-      $modMsg = "0"
       $modPf = "0"
       $modPd = "0"
       $modChk = "0"
@@ -454,7 +498,6 @@ function modSel {
       $modChk = "$modPf.dll"
     }
     if ( $modMode -eq 2 ) {
-      $modMsg = "0"
       $modPf = "0"
       $modPd = "0"
       $modChk = "0"
@@ -484,7 +527,6 @@ function modSel {
       $modChk = "$modPf.dll"
     }
     if ( $modMode -eq 2 ) {
-      $modMsg = "0"
       $modPf = "0"
       $modPd = "0"
       $modChk = "0"
@@ -499,7 +541,6 @@ function modSel {
       $modChk = "$modPf.dll"
     }
     if ( $modMode -eq 2 ) {
-      $modMsg = "0"
       $modPf = "0"
       $modPd = "0"
       $modChk = "0"
@@ -510,34 +551,49 @@ function modSel {
   if ( $m2P -eq 5 ) {
     if ( $modMode -lt 2 ) {
       $modPf = "ClockMod"
-      $modPd = "0"
       $modCf = "aedenthorn.ClockMod"
       $modChk = "$modPf.dll"
       $modName = "Clock"
     }
     if ( $modMode -eq 2) {
-      $modMsg = "0"
-      $modPf = "EquipmentAndQuickSlots"
-      $modPd = "0"
+      $modPf = "0"
       $modCf = "randyknapp.mods.equipmentandquickslots"
+      $modChk = "0"
+      $modName = "Equipment & Quick Slotsy"
+    }
+    $modPd = "0"
+  }
+  if ( $m2P -eq 6 ) {
+    if ( $modMode -lt 0 ) {
+      $modPf = "Compass"
+      $modPd = "Compass"
+      $modCf = "aedenthorn.Compass"
       $modChk = "$modPf.dll"
-      $modName = "Equipment & Quick Slots"
+      $modName = "$modPd"
+    }
+    if ($modMode -eq 2 ) {
+      $modPf = "0"
+      $modPd = "0"
+      $modCf = "org.bepinex.plugins.valheim.quick_stack"
+      $modChk = "0"
+      $modName = "Quick Stack"
     }
   }
-
-  if ( $m2P -eq 6 ) {
-    $modPf = "Compass"
-    $modPd = "Compass"
-    $modCf = "aedenthorn.Compass"
-    $modChk = "$modPf.dll"
-    $modName = "$modPd"
-  }
   if ( $m2P -eq 7 ) {
-    $modPf = "FermenterStatus"
-    $modPd = "0"
-    $modCf = "0"
-    $modChk = "$modPf.dll"
-    $modName = "Fermenter Status"
+    if ( $modMode -lt 2 ) {
+      $modPf = "FermenterStatus"
+      $modPd = "0"
+      $modCf = "0"
+      $modChk = "$modPf.dll"
+      $modName = "Fermenter Status"
+    }
+    if ( $ modMode -eq 2 ) {
+      $modPf = "0"
+      $modPd = "0"
+      $modCf = "bakaSpaceman.LastUsedWeapons"
+      $modChk = "0"
+      $modName = "Last Used Weapon"
+    }
   }
   if ( $m2P -eq 8 ) {
     $modPf = "0"
@@ -554,7 +610,7 @@ function modSel {
     $modName = "$modPd"
   }
   if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 10 ) ) -or
-       ( ( $modMode -eq 2 ) -and ( $m2P -eq 7 ) ) ) {
+       ( ( $modMode -eq 2 ) -and ( $m2P -eq 8 ) ) ) {
 		modMgmt
 	}
   chgState
