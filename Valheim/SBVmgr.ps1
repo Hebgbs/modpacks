@@ -6,6 +6,7 @@ $cBPXdst = "$modPath\BepInEx\config"
 
 # Perform operations
 function chgState {
+  echo ""
   if ( $modMode -eq 1 ) {
     if ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst" ) ) {
       mkdir $modPath\BepInEx\$pMgrDst -ErrorAction SilentlyContinue | Out-Null
@@ -23,8 +24,8 @@ function chgState {
   }
   if ( $modMode -eq 2 ) {
     if ( Test-Path -Path "$modPath\BepInEx\$cMgrDst\$modCf.cfg" ) {
-      Write-Host "$modName has been disabled!" -Foreground "red" -BackgroundColor "black"
-      Write-Host "Enable before editing!" -Foreground "red" -BackgroundColor "black"
+      Write-Host "$modName has been disabled!" -Foreground "DarkRed" -BackgroundColor "black"
+      Write-Host "Enable before editing!" -Foreground "DarkRed" -BackgroundColor "black"
       pakPrompt
       modMgmt
     }
@@ -467,6 +468,7 @@ function submenuMsg {
 }
 
 function chgFin {
+  echo ""
   Write-Host "$modName has been ${mgrWord}d." -ForegroundColor "$modeStatus"
   if ( $postOpMsg -ne 0 ) {
     Write-Host "$postOpMsg" -ForegroundColor "$modeStatus"
@@ -623,7 +625,7 @@ function modMgmt {
 
   if ( $m1P -eq 0 ) {
 		Set-Variable -Name "modMode" -Value "0" -Scope Script
-    $modeStatus = "green"
+    $modeStatus = "Green"
     $mgrWord = "enable"
     $postOpMsg = "0"
     $pMgrSrc = "disabledPlugins"
@@ -636,7 +638,7 @@ function modMgmt {
        ( $m1P -eq 2 ) ) {
     if ( $m1P -eq 1 ) {
   		Set-Variable -Name "modMode" -Value "1" -Scope Script
-      $modeStatus = "yellow"
+      $modeStatus = "Yellow"
       $mgrWord = "disable"
       $postOpMsg = "Re-enable it by changing management mode."
       $pMgrSrc = "plugins"
@@ -644,7 +646,7 @@ function modMgmt {
     }
     if ( $m1P -eq 2 ) {
   		Set-Variable -Name "modMode" -Value "2" -Scope Script
-      $modeStatus = "green"
+      $modeStatus = "Green"
       $mgrWord = "configure"
       $postOpMsg = "Continue to make adjustments as desired."
       $pMgrSrc = "0"
@@ -830,4 +832,9 @@ function mkLn {
   New-item -Target "$cBPXsrc\Toawy.TPWolves.cfg" -ItemType SymbolicLink -Path "$cBPXdst\Toawy.TPWolves.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\virtuacode.valheim.trashitems.cfg" -ItemType SymbolicLink -Path "$cBPXdst\virtuacode.valheim.trashitems.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\zarboz.fisticuffs.cfg" -ItemType SymbolicLink -Path "$cBPXdst\zarboz.fisticuffs.cfg" -ErrorAction SilentlyContinue | Out-Null
+}
+
+# Software version
+function prtVer {
+  echo "Backend version 052021"
 }
