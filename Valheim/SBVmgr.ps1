@@ -178,20 +178,24 @@ function cfgChangeMenu {
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 3)
   }
   if ( $m2P -eq 6 ) {
-    $m3O = '&Key binding','E&xit'
+    $m3O = '&Binding','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   if ( $m2P -eq 7 ) {
-    $m3O = '&Key binding','E&xit'
+    $m3O = '&Binding','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   if ( $m2P -eq 8 ) {
-    $m3O = '&Key binding','E&xit'
+    $m3O = '&Binding','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
+  }
+  if ( $m2P -eq 9 ) {
+    $m3O = '&Ping current location key','&Share all created pins key','Share &individual pins mod key','E&xit'
+    $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 3)
   }
   # All of the conditions for exiting the menu.
   if ( ( ( $mP2 -eq 3 ) -and ( $m3P -eq 4 ) ) -or
-     ( ( ( $m2P -eq 1 ) -or ( $m2P -eq 5 ) ) -and ( $m3P -eq 3 ) ) -or
+     ( ( ( $m2P -eq 1 ) -or ( $m2P -eq 5 ) -or ( $m2P -eq 9 ) ) -and ( $m3P -eq 3 ) ) -or
      ( ( ( $m2P -eq 0 ) -or ( $m2P -eq 2 ) -or ( $m2P -eq 4 ) ) -and ( $m3P -eq 2 ) ) -or
      ( ( ( $m2P -eq 6 ) -or ( $m2P -eq 7 ) -or ( $m2P -eq 8 ) ) -and ( $m3P -eq 1 ) ) ) {
     modSel
@@ -417,26 +421,57 @@ function cfgChangeMenu {
 
   # Quick Stack
   if ( $m2P -eq 6 ) {
-    $lineNo = "8"
-    $linePfx = "QuickStackKey"
-    $dftSfx = "BackQuote"
-    $chgCfg = "$keyQ depositing inventory in nearby containers"
+    if ( $m3P -eq 0 ) {
+      $chgCfg = "$keyQ depositing inventory in nearby containers"
+      $lineNo = "8"
+      $linePfx = "QuickStackKey"
+      $dftSfx = "BackQuote"
+    }
+    $lineSfx = Read-Host -Prompt "$chgCfg"
   }
 
   # Last Used Weapon
   if ( $m2P -eq 7 ) {
-    $lineNo = "20"
-    $linePfx = "ToggleLastUsedWeapons"
-    $dftSfx = "R"
-    $chgCfg = "$keyQ using previously-selected weapon"
+    if ( $m3P -eq 0 ) {
+      $lineNo = "20"
+      $linePfx = "ToggleLastUsedWeapons"
+      $dftSfx = "R"
+      $chgCfg = "$keyQ using previously-selected weapon"
+    }
+    $lineSfx = Read-Host -Prompt "$chgCfg"
   }
 
   # Improved Swimming
   if ( $m2P -eq 8 ) {
-    $lineNo = "9"
-    $linePfx = "swimFasterKey"
-    $dftSfx = "LeftShift"
-    $chgCfg = "$keyQ faster swimming (ideally, use `"run`" key)"
+    if ( $m3P -eq 0 ) {
+      $lineNo = "9"
+      $linePfx = "swimFasterKey"
+      $dftSfx = "LeftShift"
+      $chgCfg = "$keyQ faster swimming (ideally, use `"run`" key)"
+    }
+    $lineSfx = Read-Host -Prompt "$chgCfg"
+  }
+
+  if ( $m2P -eq 9 ) {
+    if ( $mP3 -eq 0 ) {
+      $lineNo = "13"
+      $linePfx = "PingInputKey"
+      $dftSfx = "T"
+      $chgCfg = "$keyQ making your current location known"
+    }
+    if ( $mP3 -eq 1 ) {
+      $lineNo = "45"
+      $linePfx = "SharePinsKey"
+      $dftSfx = "F9"
+      $chgCfg = "$keyQ sharing all newly-created pins to everyone's map"
+    }
+    if ( $mP3 -eq 2 ) {
+      $lineNo = "60"
+      $linePfx = "ShareIndividualPinKey"
+      $dftSfx = "LeftAlt"
+      $chgCfg = "Key to hold while middle-clicking for sharing an individual pin"
+    }
+    $lineSfx = Read-Host -Prompt "$chgCfg"
   }
 
   if ( $cls -eq 0 ) {
@@ -495,8 +530,8 @@ function modSel {
     $modPf = "0"
     $modPf = "0"
     $modChk = "0"
-  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','&Improved Swimming','E&xit'
-  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 9)
+  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','&Improved Swimming','E&xplore Together','E&xit'
+    $m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
   }
   if ( $m2P -eq 0 ) {
     if ( $modMode -lt 2 ) {
@@ -557,7 +592,6 @@ function modSel {
       $modCf = "randyknapp.mods.equipmentandquickslots"
       $modName = "Equipment & Quick Slotsy"
     }
-    $modPd = "0"
   }
   if ( $m2P -eq 6 ) {
     if ( $modMode -lt 0 ) {
@@ -596,14 +630,19 @@ function modSel {
       $modCf = "projjm.improvedswimming"
       $modName = "Improved Swimming"
     }
-    $modPf = "0"
   }
   if ( $m2P -eq 9 ) {
-    $modPf = "0"
-    $modPd = "ValheimFPSBoost"
-    $modCf = "0"
-    $modChk = "$modPd"
-    $modName = "$modPd"
+    if ( $modMode -lt 2 ) {
+      $modPf = "0"
+      $modPd = "ValheimFPSBoost"
+      $modChk = "$modPd"
+      $modCf = "0"
+      $modName = "$modPd"
+    }
+    if ( $modMode -eq 2 ) {
+      $modCf = "com.rolopogo.plugins.exploretogether"
+      $modName = "Explore Together"
+    }
   }
   if ( $m2P -eq 10 ) {
     $modPf = "1"
@@ -613,7 +652,7 @@ function modSel {
     $modName = "Custom Round Shield Paints"
   }
   if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 11 ) ) -or
-       ( ( $modMode -eq 2 ) -and ( $m2P -eq 9 ) ) ) {
+       ( ( $modMode -eq 2 ) -and ( $m2P -eq 10 ) ) ) {
 		modMgmt
 	}
   chgState
@@ -850,6 +889,6 @@ function mkLn {
 
 # Software version
 function prtVer {
-  Write-Host "Backend version 052221-0030" -ForegroundColor darkgray
+  Write-Host "Backend version 052221-1125" -ForegroundColor darkgray
   echo ""
 }
