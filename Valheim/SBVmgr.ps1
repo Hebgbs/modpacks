@@ -6,10 +6,14 @@ $cBPXdst = "$modPath\BepInEx\config"
 
 # Perform operations
 function chgState {
-  echo ""
   if ( $modMode -eq 1 ) {
     if ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst" ) ) {
       mkdir $modPath\BepInEx\$pMgrDst -ErrorAction SilentlyContinue | Out-Null
+    }
+    if ( $modPf -eq "1" ) {
+      if ( -not ( Test-Path -Path "$modPath\BepInEx\$pMgrDst\CustomTextures" ) ) {
+        mkdir $modPath\BepInEx\$pMgrDst\CustomTextures -ErrorAction SilentlyContinue | Out-Null
+      }
     }
     if ( -not ( Test-Path -Path "$modPath\BepInEx\$cMgrDst" ) ) {
       mkdir $modPath\BepInEx\$cMgrDst -ErrorAction SilentlyContinue | Out-Null
@@ -484,8 +488,8 @@ function modSel {
 	$m2T = ""
   $m2Q = "Select modification to ${mgrWord}:"
   if ( $modMode -ne 2 ) {
-  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','E&xit'
-  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
+  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','Custom &Round Shield Paints','E&xit'
+  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 11)
   }
   if ( $modMode -eq 2 ) {
     $modPf = "0"
@@ -556,7 +560,7 @@ function modSel {
     $modPd = "0"
   }
   if ( $m2P -eq 6 ) {
-    if ( $modMode -lt 2 ) {
+    if ( $modMode -lt 0 ) {
       $modPf = "Compass"
       $modPd = "Compass"
       $modCf = "aedenthorn.Compass"
@@ -601,7 +605,14 @@ function modSel {
     $modChk = "$modPd"
     $modName = "$modPd"
   }
-  if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 10 ) ) -or
+  if ( $m2P -eq 10 ) {
+    $modPf = "1"
+    $modPd = "CustomTextures\Round_shield_paints"
+    $modCf = "0"
+    $modChk = "$modPd"
+    $modName = "Custom Round Shield Paints"
+  }
+  if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 11 ) ) -or
        ( ( $modMode -eq 2 ) -and ( $m2P -eq 9 ) ) ) {
 		modMgmt
 	}
@@ -839,5 +850,6 @@ function mkLn {
 
 # Software version
 function prtVer {
-  echo "Backend version 052021"
+  Write-Host "Backend version 052221-0030" -ForegroundColor darkgray
+  echo ""
 }
