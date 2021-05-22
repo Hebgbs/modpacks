@@ -178,15 +178,15 @@ function cfgChangeMenu {
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 3)
   }
   if ( $m2P -eq 6 ) {
-    $m3O = '&Binding','E&xit'
+    $m3O = '&Quick stack key','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   if ( $m2P -eq 7 ) {
-    $m3O = '&Binding','E&xit'
+    $m3O = '&Use previous weapon key','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   if ( $m2P -eq 8 ) {
-    $m3O = '&Binding','E&xit'
+    $m3O = '&Swim faster key','E&xit'
     $m3P = $Host.UI.PromptForChoice($m3T, $m3Q, $m3O, 1)
   }
   if ( $m2P -eq 9 ) {
@@ -452,24 +452,25 @@ function cfgChangeMenu {
     $lineSfx = Read-Host -Prompt "$chgCfg"
   }
 
+  # Explore Together
   if ( $m2P -eq 9 ) {
-    if ( $mP3 -eq 0 ) {
+    if ( $m3P -eq 0 ) {
+      $chgCfg = "$keyQ making your current location known"
       $lineNo = "13"
       $linePfx = "PingInputKey"
       $dftSfx = "T"
-      $chgCfg = "$keyQ making your current location known"
     }
-    if ( $mP3 -eq 1 ) {
+    if ( $m3P -eq 1 ) {
+      $chgCfg = "$keyQ sharing all newly-created pins to everyone's map"
       $lineNo = "45"
       $linePfx = "SharePinsKey"
       $dftSfx = "F9"
-      $chgCfg = "$keyQ sharing all newly-created pins to everyone's map"
     }
-    if ( $mP3 -eq 2 ) {
+    if ( $m3P -eq 2 ) {
+      $chgCfg = "Key to hold while middle-clicking for sharing an individual pin"
       $lineNo = "60"
       $linePfx = "ShareIndividualPinKey"
       $dftSfx = "LeftAlt"
-      $chgCfg = "Key to hold while middle-clicking for sharing an individual pin"
     }
     $lineSfx = Read-Host -Prompt "$chgCfg"
   }
@@ -523,14 +524,14 @@ function modSel {
 	$m2T = ""
   $m2Q = "Select modification to ${mgrWord}:"
   if ( $modMode -ne 2 ) {
-  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','Custom &Round Shield Paints','E&xit'
+  	$m2O = 'Troll &Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','Custom &Round Shield Paints','E&xit'
   	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 11)
   }
   if ( $modMode -eq 2 ) {
     $modPf = "0"
     $modPf = "0"
     $modChk = "0"
-  	$m2O = '&Troll Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','&Improved Swimming','E&xplore Together','E&xit'
+  	$m2O = 'Troll &Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','&Improved Swimming','Explore &Together','E&xit'
     $m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
   }
   if ( $m2P -eq 0 ) {
@@ -889,6 +890,6 @@ function mkLn {
 
 # Software version
 function prtVer {
-  Write-Host "Backend version 052221-1125" -ForegroundColor darkgray
+  Write-Host "Backend version 052221-1525" -ForegroundColor darkgray
   echo ""
 }
