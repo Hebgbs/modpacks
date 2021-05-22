@@ -666,6 +666,8 @@ function mkLnOnce {
   New-Item -Target "$pBPXsrc\Compass" -ItemType Junction -Path "$pBPXdst\Compass" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\Jowleth" -ItemType Junction -Path "$pBPXdst\Jowleth" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\ValheimFPSBoost" -ItemType Junction -Path "$pBPXdst\ValheimFPSBoost" -ErrorAction SilentlyContinue | Out-Null
+  mkdir "$pBPXdst\CustomTextures" | Out-Null
+  New-Item -Target "$pBPXsrc\CustomTextures\Round_shield_paints" -ItemType Junction -Path "$pBPXdst\CustomTextures\Round_shield_paints" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx plugins
   New-Item -Target "$pBPXsrc\ClockMod.dll" -ItemType SymbolicLink -Path "$pBPXdst\ClockMod.dll" -ErrorAction SilentlyContinue | Out-Null
   New-Item -Target "$pBPXsrc\Compass.dll" -ItemType SymbolicLink -Path "$pBPXdst\Compass.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -730,7 +732,7 @@ function mkLn {
   New-item -Target "$pBPXsrc\ExploreTogether.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\ExtendedItemDataFramework.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExtendedItemDataFramework.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\FarmGrid.dll" -ItemType SymbolicLink -Path "$pBPXdst\FarmGrid.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\fastJSON.dll" -ItemType SymbolicLink -Path "$pBPXdst\fastJSON.dll" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$pBPXdst\fastJSON.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\Fisticuffs.dll" -ItemType SymbolicLink -Path "$pBPXdst\Fisticuffs.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\GodSword.dll" -ItemType SymbolicLink -Path "$pBPXdst\GodSword.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\Gravekeeper.dll" -ItemType SymbolicLink -Path "$pBPXdst\Gravekeeper.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -756,7 +758,8 @@ function mkLn {
   New-item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\RRRNpcs_0.2.2.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs_0.2.2.dll" -ErrorAction SilentlyContinue | Out-Null
+  Remove-item "$pBPXdst\RRRNpcs_0.2.2.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\RRRNpcs.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\SkillInjector.dll" -ItemType SymbolicLink -Path "$pBPXdst\SkillInjector.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\Skills Give More Carry Weight.dll" -ItemType SymbolicLink -Path "$pBPXdst\Skills Give More Carry Weight.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\skyheim.dll" -ItemType SymbolicLink -Path "$pBPXdst\skyheim.dll" -ErrorAction SilentlyContinue | Out-Null
