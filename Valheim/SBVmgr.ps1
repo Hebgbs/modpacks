@@ -556,7 +556,7 @@ function modSel {
     $modPd = "0"
   }
   if ( $m2P -eq 6 ) {
-    if ( $modMode -lt 0 ) {
+    if ( $modMode -lt 2 ) {
       $modPf = "Compass"
       $modPd = "Compass"
       $modCf = "aedenthorn.Compass"
