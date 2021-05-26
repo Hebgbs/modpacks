@@ -779,6 +779,7 @@ function mkLn {
   New-item -Target "$pBPXsrc\BetterWagon.dll" -ItemType SymbolicLink -Path "$pBPXdst\BetterWagon.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\BuildExpansion.dll" -ItemType SymbolicLink -Path "$pBPXdst\BuildExpansion.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\CookingSkill.dll" -ItemType SymbolicLink -Path "$pBPXdst\CookingSkill.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\CustomTextures.dll" -ItemType SymbolicLink -Path "$pBPXdst\CustomTextures.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\EquipmentAndQuickSlots.dll" -ItemType SymbolicLink -Path "$pBPXdst\EquipmentAndQuickSlots.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\ExploreTogether.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExploreTogether.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\ExtendedItemDataFramework.dll" -ItemType SymbolicLink -Path "$pBPXdst\ExtendedItemDataFramework.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -889,7 +890,7 @@ function mkLn {
 }
 
 # Software version
-function prtVer {
-  Write-Host "Backend version 052221-1525" -ForegroundColor darkgray
+function prtBkVer {
+  Write-Host "Backend version 052221-1525" -ForegroundColor darkblue
   echo ""
 }
