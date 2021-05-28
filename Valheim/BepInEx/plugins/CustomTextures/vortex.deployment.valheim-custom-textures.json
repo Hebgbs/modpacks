@@ -3,7 +3,7 @@
   "version": 1,
   "deploymentMethod": "move_activator",
   "gameId": "valheim",
-  "deploymentTime": 1622006697950,
+  "deploymentTime": 1622174643832,
   "stagingPath": "C:\\Users\\Brandon\\AppData\\Roaming\\Vortex\\valheim\\mods",
   "targetPath": "C:\\Users\\Brandon\\Documents\\GitHub\\modpacks-staging\\Valheim\\BepInEx\\plugins\\CustomTextures",
   "files": [
