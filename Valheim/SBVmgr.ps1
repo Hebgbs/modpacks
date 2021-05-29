@@ -17,6 +17,7 @@ function XXXwarn {
   Write-Host "then press " -NoNewLine
   Write-Host "[Enter]" -BackgroundColor "white" -ForegroundColor "darkmagenta" -NoNewLine
   Read-Host " to continue."
+  clearText
   chgState
 }
 
@@ -587,10 +588,12 @@ function modSel {
       $modCf = "com.loki.clientmods.valheim.firstperson"
     }
     if ( $modPf -eq 1 ) {
-      $modPd = "CustomTextures\Val_Nude"
+      $modPd = "CustomTextures\Val-Nude"
       $modChk = "$modPd"
       $modName = "Valheim nudity mod"
-      XXXwarn
+      if ( $modMode -eq 0 ) {
+        XXXwarn
+      }
     }
   }
   if ( $m2P -eq 2 ) {
