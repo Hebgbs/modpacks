@@ -4,6 +4,22 @@ $pBPXdst = "$modPath\BepInEx\plugins"
 $cBPXsrc = "$repoPath\$repoBranch\BepInEx\config"
 $cBPXdst = "$modPath\BepInEx\config"
 
+# Big bad warning
+function XXXwarn {
+  clearText
+  Write-Host "Mature content warning" -BackgroundColor "black" -ForegroundColor "magenta"
+  echo ""
+  echo "This modification provides mature content which"
+  echo "may be unsuitable for viewing by minors."
+  echo ""
+  echo "If you understand this, are within legal age of"
+  echo "consent and agree to prohibit viewing by minors,"
+  Write-Host "then press " -NoNewLine
+  Write-Host "[Enter]" -BackgroundColor "white" -ForegroundColor "darkmagenta" -NoNewLine
+  Read-Host " to continue."
+  chgState
+}
+
 # Perform operations
 function chgState {
   if ( $modMode -eq 1 ) {
@@ -307,6 +323,9 @@ function cfgChangeMenu {
       $modCf = "virtuacode.valheim.equipwheelfour"
       $itemNo = "4"
     }
+    if ( $m3P -eq 4 ) {
+      modSel
+    }
 
     submenuMsg
     $m4Q = "Select property to modify:"
@@ -524,45 +543,69 @@ function modSel {
 	$m2T = ""
   $m2Q = "Select modification to ${mgrWord}:"
   if ( $modMode -ne 2 ) {
-  	$m2O = 'Troll &Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','Custom &Round Shield Paints','E&xit'
-  	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 11)
+    if ( $modPf -ne 1 ) {
+    	$m2O = 'Troll &Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','Cloc&k','Com&pass','&Fermenter Status','&Ore Status','ValheimFPS&Boost','&Custom Textures mods (menu)','E&xit'
+    	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 11)
+    }
+    if ( $modPf -eq 1 ) {
+      $m2Q = "Select custom texture modification to ${mgrWord}:"
+      $m2O = '&Round shield paints','Val-&Nude','E&xit'
+    	$m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 2)
+    }
   }
   if ( $modMode -eq 2 ) {
     $modPf = "0"
-    $modPf = "0"
+    $modPd = "0"
     $modChk = "0"
   	$m2O = 'Troll &Armor Rework','&1st-Person Camera','Movable Inventory &Windows','E&quip Wheel','E&mote Wheel','&Equipment and Quick Slots','Quick &Stack','&Last Used Weapon','&Improved Swimming','Explore &Together','E&xit'
     $m2P = $Host.UI.PromptForChoice($m2T, $m2Q, $m2O, 10)
   }
   if ( $m2P -eq 0 ) {
-    if ( $modMode -lt 2 ) {
-      $modPf = "TrollArmorRework"
-      $modPd = "0"
-      $modChk = "$modPf.dll"
+    if ( $modPF -ne 1 ) {
+      if ( $modMode -lt 2 ) {
+        $modPf = "TrollArmorRework"
+        $modPd = "0"
+        $modChk = "$modPf.dll"
+      }
+      $modName = "Troll armor rework"
+      $modCf = "StrykeDev.TrollArmorRework"
     }
-    $modName = "Troll armor rework"
-    $modCf = "StrykeDev.TrollArmorRework"
+    if ( $modPf -eq 1 ) {
+      $modPd = "CustomTextures\Round_shield_paints"
+      $modChk = "$modPd"
+      $modName = "Custom Round Shield Paints"
+    }
   }
   if ( $m2P -eq 1 ) {
-    if ( $modMode -lt 2 ) {
-      $modPf = "FirstPersonValheimClientMod"
-      $modPd = "0"
-      $modChk = "$modPf.dll"
+    if ( $modPf -ne 1 ) {
+      if ( $modMode -lt 2 ) {
+        $modPf = "FirstPersonValheimClientMod"
+        $modPd = "0"
+        $modChk = "$modPf.dll"
+      }
+      $modName = "Loki's First Person Valheim"
+      $modCf = "com.loki.clientmods.valheim.firstperson"
     }
-    $modName = "Loki's First Person Valheim"
-    $modCf = "com.loki.clientmods.valheim.firstperson"
+    if ( $modPf -eq 1 ) {
+      $modPd = "CustomTextures\Val_Nude"
+      $modChk = "$modPd"
+      $modName = "Valheim nudity mod"
+      XXXwarn
+    }
   }
   if ( $m2P -eq 2 ) {
-    if ( $modMode -lt 2 ) {
-      $modPf = "MovableInventoryWindows"
-      $modPd = "0"
-      $modChk = "$modPf.dll"
+    if ( $modPF -ne 1 ) {
+      if ( $modMode -lt 2 ) {
+        $modPf = "MovableInventoryWindows"
+        $modPd = "0"
+        $modChk = "$modPf.dll"
+      }
+      if ( $modMode -eq 2 ) {
+        $modMsg = "1"
+      }
+      $modName = "Movable inventory windows"
+      $modCf = "aedenthorn.MovableInventoryWindows"
     }
-    if ( $modMode -eq 2 ) {
-      $modMsg = "1"
-    }
-    $modName = "Movable inventory windows"
-    $modCf = "aedenthorn.MovableInventoryWindows"
   }
   if ( $m2P -eq 3 ) {
     if ( $modMode -lt 2 ) {
@@ -646,14 +689,18 @@ function modSel {
     }
   }
   if ( $m2P -eq 10 ) {
-    $modPf = "1"
-    $modPd = "CustomTextures\Round_shield_paints"
-    $modCf = "0"
-    $modChk = "$modPd"
-    $modName = "Custom Round Shield Paints"
+    if ( $modMode -ne 2 ) {
+      $modPf = "1"
+      $modCf = "0"
+      modSel
+    }
   }
-  if ( ( ( $modMode -ne 2 ) -and ( $m2P -eq 11 ) ) -or
+  if ( ( ( $modMode -ne 2 ) -and ( ( ( $modPf -ne 1 ) -and ( $m2P -eq 11 ) ) -or
+                                   ( ( $modPf -eq 1 ) -and ( $m2P -eq 2 ) ) ) ) -or
        ( ( $modMode -eq 2 ) -and ( $m2P -eq 10 ) ) ) {
+    if ( $modPf -eq 1 ) {
+      $modPf = "0"
+    }
 		modMgmt
 	}
   chgState
@@ -891,6 +938,6 @@ function mkLn {
 
 # Software version
 function prtBkVer {
-  Write-Host "Backend version 052221-1525" -ForegroundColor darkblue
+  Write-Host "Backend version 052621-0130" -ForegroundColor darkblue
   echo ""
 }
