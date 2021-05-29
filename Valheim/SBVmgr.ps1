@@ -796,6 +796,32 @@ function mkLnOnce {
 }
 
 function mkLn {
+  # Monsternomicon and RRR stuff
+    # Directories
+  #New-item -Target "$cBPXsrc\AshLand Monsters" -ItemType Junction -Path "$cBPXdst\AshLand Monsters" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\custom_raids.supplemental.Ashlands" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Ashlands" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\custom_raids.supplemental.DeepNorth" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.DeepNorth" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\custom_raids.supplemental.Svartalfar" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Svartalfar" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\Ocean Monsters" -ItemType Junction -Path "$cBPXdst\Ocean Monsters" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\Svartalfar Monsters" -ItemType Junction -Path "$cBPXdst\Svartalfar Monsters" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXsrc\custom_raids*" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXsrc\* Monsters" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+    # Files
+  #New-item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$pBPXsrc\RRRNpcs.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs.dll" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$pBPXsrc\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$pBPXsrc\Valheim.SpawnThat.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\spawn_that.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.cfg" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\spawn_that.local_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.local_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\spawn_that.world_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
+  #New-item -Target "$cBPXsrc\spawn_that.world_spawners.ocean.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ocean.cfg" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXsrc\spawn_that*" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXsrc\custom_raids*" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$pBPXsrc\RRR*.dll" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$pBPXsrc\Valheim.CustomRaids.dll" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$pBPXsrc\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx and MMHookGem
     # Directories
   New-Item -Target "$repoPath\$repoBranch\doorstop_libs" -ItemType Junction -Path "$modPath\doorstop_libs" -ErrorAction SilentlyContinue | Out-Null
@@ -857,11 +883,7 @@ function mkLn {
   New-item -Target "$pBPXsrc\OverheadAxeSwing.dll" -ItemType SymbolicLink -Path "$pBPXdst\OverheadAxeSwing.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\QuickStack.dll" -ItemType SymbolicLink -Path "$pBPXdst\QuickStack.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RepairAll.dll" -ItemType SymbolicLink -Path "$pBPXdst\RepairAll.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
   Remove-item "$pBPXdst\RRRNpcs_0.2.2.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\RRRNpcs.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\SkillInjector.dll" -ItemType SymbolicLink -Path "$pBPXdst\SkillInjector.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\Skills Give More Carry Weight.dll" -ItemType SymbolicLink -Path "$pBPXdst\Skills Give More Carry Weight.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\skyheim.dll" -ItemType SymbolicLink -Path "$pBPXdst\skyheim.dll" -ErrorAction SilentlyContinue | Out-Null
@@ -872,14 +894,8 @@ function mkLn {
   New-item -Target "$pBPXsrc\UsefulPaths.dll" -ItemType SymbolicLink -Path "$pBPXdst\UsefulPaths.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\UsefulTrophies.dll" -ItemType SymbolicLink -Path "$pBPXdst\UsefulTrophies.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\Valheim.CustomRaids.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.CustomRaids.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$pBPXsrc\Valheim.SpawnThat.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx configuration directories
-  New-item -Target "$cBPXsrc\AshLand Monsters" -ItemType Junction -Path "$cBPXdst\AshLand Monsters" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\custom_raids.supplemental.Ashlands" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Ashlands" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\custom_raids.supplemental.Svartalfar" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Svartalfar" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\Ocean Monsters" -ItemType Junction -Path "$cBPXdst\Ocean Monsters" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\Svartalfar Monsters" -ItemType Junction -Path "$cBPXdst\Svartalfar Monsters" -ErrorAction SilentlyContinue | Out-Null
+   # Moved to monNom / RRR
   # BepInEx configuration
   New-item -Target "$cBPXsrc\advize.CartographySkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\advize.CartographySkill.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\aedenthorn.AutoSplitStack.cfg" -ItemType SymbolicLink -Path "$cBPXdst\aedenthorn.AutoSplitStack.cfg" -ErrorAction SilentlyContinue | Out-Null
@@ -927,10 +943,6 @@ function mkLn {
   New-item -Target "$cBPXsrc\RepairAll.cfg" -ItemType SymbolicLink -Path "$cBPXdst\RepairAll.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\rin_jugatla.AddAllFuel.cfg" -ItemType SymbolicLink -Path "$cBPXdst\rin_jugatla.AddAllFuel.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\SkillsGiveMoreCarryWeight.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SkillsGiveMoreCarryWeight.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\spawn_that.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\spawn_that.local_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.local_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\spawn_that.world_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
-  New-item -Target "$cBPXsrc\spawn_that.world_spawners.ocean.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ocean.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\SSyl.FishFood.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SSyl.FishFood.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\SSyl.ToastyTorches.cfg" -ItemType SymbolicLink -Path "$cBPXdst\SSyl.ToastyTorches.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\thegreyham.valheim.CookingSkill.cfg" -ItemType SymbolicLink -Path "$cBPXdst\thegreyham.valheim.CookingSkill.cfg" -ErrorAction SilentlyContinue | Out-Null
