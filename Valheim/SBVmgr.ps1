@@ -805,7 +805,13 @@ function mkLn {
   #New-item -Target "$cBPXsrc\Ocean Monsters" -ItemType Junction -Path "$cBPXdst\Ocean Monsters" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\Svartalfar Monsters" -ItemType Junction -Path "$cBPXdst\Svartalfar Monsters" -ErrorAction SilentlyContinue | Out-Null
   #Remove-Item "$cBPXsrc\custom_raids*" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$cBPXsrc\* Monsters" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\* Monsters" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\*.Ashlands" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\*.Ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\*.Svartalfar" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\*.Svartalfar.cfg" -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\*.Ocean" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  Remove-Item "$cBPXdst\*.Ocean.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\Monsternomicon" -ItemType Junction -Path "$cBPXdst\Monsternomicon" -ErrorAction SilentlyContinue | Out-Null
     # Files
   New-item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
