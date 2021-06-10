@@ -156,7 +156,7 @@
         </member>
         <member name="P:Jotunn.Configs.ItemConfig.Amount">
             <summary>
-                The amount of <see cref="P:Jotunn.Configs.ItemConfig.Item"/> that will be created from the recipe.
+                The amount of <see cref="P:Jotunn.Configs.ItemConfig.Item"/> that will be created from the recipe. Defaults to <c>1</c>.
             </summary>
         </member>
         <member name="P:Jotunn.Configs.ItemConfig.Enabled">
@@ -225,8 +225,8 @@
         </member>
         <member name="P:Jotunn.Configs.KeyHintConfig.Piece">
             <summary>
-                If not null the KeyHint will also be bound to a specific <see cref="T:Piece"/>
-                which must be selected for building.
+                If not null or empty the KeyHint will also be bound to a specific 
+                <see cref="T:Piece"/> which must be selected for building.
             </summary>
         </member>
         <member name="P:Jotunn.Configs.KeyHintConfig.ButtonConfigs">
@@ -291,7 +291,7 @@
         </member>
         <member name="P:Jotunn.Configs.PieceConfig.AllowedInDungeons">
             <summary>
-                Can this piece be built in dungeons?
+                Can this piece be built in dungeons? Defaults to <c>false</c>.
             </summary>
         </member>
         <member name="P:Jotunn.Configs.PieceConfig.PieceTable">
@@ -348,7 +348,7 @@
         </member>
         <member name="P:Jotunn.Configs.RecipeConfig.Amount">
             <summary>
-                The amount of <see cref="P:Jotunn.Configs.RecipeConfig.Item"/> that will be created from this Recipe. Defaults to 1.
+                The amount of <see cref="P:Jotunn.Configs.RecipeConfig.Item"/> that will be created from this Recipe. Defaults to <c>1</c>.
             </summary>
         </member>
         <member name="P:Jotunn.Configs.RecipeConfig.Enabled">
@@ -1600,6 +1600,17 @@
                 Initialize the manager
             </summary>
         </member>
+        <member name="M:Jotunn.Managers.GUIManager.RegisterKeyHints">
+            <summary>
+                Create custom KeyHint objects for every config added.
+            </summary>
+        </member>
+        <member name="M:Jotunn.Managers.GUIManager.CreateKeyHintObject(Jotunn.Configs.KeyHintConfig)">
+            <summary>
+                Copy vanilla BuildHints object and create a custom one from a KeyHintConfig.
+            </summary>
+            <param name="config"></param>
+        </member>
         <member name="M:Jotunn.Managers.GUIManager.AddKeyHint(Jotunn.Configs.KeyHintConfig)">
             <summary>
                 Add a <see cref="T:Jotunn.Configs.KeyHintConfig"/> to the manager.<br />
@@ -1835,6 +1846,25 @@
             <param name="customItem">The custom item to add.</param>
             <returns>true if the custom item was added to the manager.</returns>
         </member>
+        <member name="M:Jotunn.Managers.ItemManager.GetItem(System.String)">
+            <summary>
+                Get a custom item by its name.
+            </summary>
+            <param name="itemName">Name of the item to search.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Jotunn.Managers.ItemManager.RemoveItem(System.String)">
+            <summary>
+                Remove a custom item by its name. Removes the custom recipe, too.
+            </summary>
+            <param name="itemName">Name of the item to remove.</param>
+        </member>
+        <member name="M:Jotunn.Managers.ItemManager.RemoveItem(Jotunn.Entities.CustomItem)">
+            <summary>
+                Remove a custom item by its ref. Removes the custom recipe, too.
+            </summary>
+            <param name="item"><see cref="T:Jotunn.Entities.CustomItem"/> to remove.</param>
+        </member>
         <member name="M:Jotunn.Managers.ItemManager.AddRecipe(Jotunn.Entities.CustomRecipe)">
             <summary>
                 Add a <see cref="T:Jotunn.Entities.CustomRecipe"/> to the game.<br />
@@ -1849,6 +1879,25 @@
                 Adds recipes defined in a JSON file at given path, relative to BepInEx/plugins
             </summary>
             <param name="path">JSON file path, relative to BepInEx/plugins folder</param>
+        </member>
+        <member name="M:Jotunn.Managers.ItemManager.GetRecipe(System.String)">
+            <summary>
+                Get a custom recipe by its name.
+            </summary>
+            <param name="recipeName">Name of the recipe to search.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Jotunn.Managers.ItemManager.RemoveRecipe(System.String)">
+            <summary>
+                Remove a custom recipe by its name. Removes it from the manager and the <see cref="T:ObjectDB"/>, if instantiated.
+            </summary>
+            <param name="recipeName">Name of the recipe to remove.</param>
+        </member>
+        <member name="M:Jotunn.Managers.ItemManager.RemoveRecipe(Jotunn.Entities.CustomRecipe)">
+            <summary>
+                Remove a custom recipe by its ref. Removes it from the manager and the <see cref="T:ObjectDB"/>, if instantiated.
+            </summary>
+            <param name="recipe"><see cref="T:Jotunn.Entities.CustomRecipe"/> to remove.</param>
         </member>
         <member name="M:Jotunn.Managers.ItemManager.AddStatusEffect(Jotunn.Entities.CustomStatusEffect)">
             <summary>
@@ -2101,6 +2150,12 @@
                 Remove a custom piece by its name.
             </summary>
             <param name="pieceName">Name of the piece to remove.</param>
+        </member>
+        <member name="M:Jotunn.Managers.PieceManager.RemovePiece(Jotunn.Entities.CustomPiece)">
+            <summary>
+                Remove a custom piece by its ref.
+            </summary>
+            <param name="piece"><see cref="T:Jotunn.Entities.CustomPiece"/> to remove.</param>
         </member>
         <member name="M:Jotunn.Managers.PieceManager.LoadPieceTables">
             <summary>
