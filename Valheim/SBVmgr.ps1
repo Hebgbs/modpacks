@@ -814,7 +814,7 @@ function mkLn {
   Remove-Item "$cBPXdst\*.Ocean.cfg" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$cBPXsrc\Monsternomicon" -ItemType Junction -Path "$cBPXdst\Monsternomicon" -ErrorAction SilentlyContinue | Out-Null
     # Files
-  Remove-Item "$cBPXdst\RRRBetterRaids_0.2.0.dll"
+  Remove-Item "$cBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
   New-item -Target "$pBPXsrc\RRRNpcs.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs.dll" -ErrorAction SilentlyContinue | Out-Null
