@@ -804,24 +804,25 @@ function mkLn {
   #New-item -Target "$cBPXsrc\custom_raids.supplemental.Svartalfar" -ItemType Junction -Path "$cBPXdst\custom_raids.supplemental.Svartalfar" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\Ocean Monsters" -ItemType Junction -Path "$cBPXdst\Ocean Monsters" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\Svartalfar Monsters" -ItemType Junction -Path "$cBPXdst\Svartalfar Monsters" -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$cBPXsrc\custom_raids*" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  #Remove-Item "$cBPXsrc\custom_raids*" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
   Remove-Item "$cBPXsrc\* Monsters" -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$cBPXsrc\Monsternomicon" -ItemType Junction -Path "$cBPXdst\Monsternomicon" -ErrorAction SilentlyContinue | Out-Null
     # Files
-  #New-item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
-  #New-item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
-  #New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
-  #New-item -Target "$pBPXsrc\RRRNpcs.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\RRRBetterRaids_0.2.0.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRBetterRaids_0.2.0.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\RRRCore.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRCore.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\RRRMonsters.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRMonsters.dll" -ErrorAction SilentlyContinue | Out-Null
+  New-item -Target "$pBPXsrc\RRRNpcs.dll" -ItemType SymbolicLink -Path "$pBPXdst\RRRNpcs.dll" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$pBPXsrc\Valheim.DisplayBepInExInfo.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.DisplayBepInExInfo.dll" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$pBPXsrc\Valheim.SpawnThat.dll" -ItemType SymbolicLink -Path "$pBPXdst\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\spawn_that.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.cfg" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\spawn_that.local_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.local_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\spawn_that.world_spawners.ashlands.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ashlands.cfg" -ErrorAction SilentlyContinue | Out-Null
   #New-item -Target "$cBPXsrc\spawn_that.world_spawners.ocean.cfg" -ItemType SymbolicLink -Path "$cBPXdst\spawn_that.world_spawners.ocean.cfg" -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$cBPXsrc\spawn_that*" -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$cBPXsrc\custom_raids*" -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$pBPXsrc\RRR*.dll" -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$pBPXsrc\Valheim.CustomRaids.dll" -ErrorAction SilentlyContinue | Out-Null
-  Remove-Item "$pBPXsrc\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
+  #Remove-Item "$cBPXsrc\spawn_that*" -ErrorAction SilentlyContinue | Out-Null
+  #Remove-Item "$cBPXsrc\custom_raids*" -ErrorAction SilentlyContinue | Out-Null
+  #Remove-Item "$pBPXsrc\RRR*.dll" -ErrorAction SilentlyContinue | Out-Null
+  #Remove-Item "$pBPXsrc\Valheim.CustomRaids.dll" -ErrorAction SilentlyContinue | Out-Null
+  #Remove-Item "$pBPXsrc\Valheim.SpawnThat.dll" -ErrorAction SilentlyContinue | Out-Null
   # BepInEx and MMHookGem
     # Directories
   New-Item -Target "$repoPath\$repoBranch\doorstop_libs" -ItemType Junction -Path "$modPath\doorstop_libs" -ErrorAction SilentlyContinue | Out-Null
